@@ -1,14 +1,37 @@
 import Head from "next/head";
-import { useSpring, animated, config } from "react-spring";
+import { useRef } from "react";
+import { useSpring, useChain, animated, config } from "react-spring";
 export default function Home() {
   const useThis = () => {
-    return "learning to use the JavaScripts 'this' keyword in a variety of contexts";
+    return "learning to use the JavaScript 'this' keyword in a variety of contexts";
   };
+
+  const fadeRef = useRef();
   const fade = useSpring({
     from: { opacity: 0 },
     opacity: 1,
-    config: config.molasses,
+    config: config.slow,
+    ref: fadeRef,
   });
+
+  const translateRef = useRef();
+  const translate = useSpring({
+    from: { opacity: 0 },
+    opacity: 1,
+    config: config.molasses,
+    ref: translateRef,
+  });
+
+  const slideRef = useRef();
+  const slide = useSpring({
+    from: { opacity: 0, transform: "translateY(-100%)" },
+    opacity: 1,
+    transform: "translateY(0%)",
+    config: config.slow,
+    ref: slideRef,
+  });
+
+  useChain([fadeRef, translateRef, slideRef], [1.25, 2.1, 2.6]);
 
   return (
     <animated.div style={fade}>
@@ -20,9 +43,26 @@ export default function Home() {
 
         <main>
           <div>
-            <h1 className="title">&lt; useThis/&gt;</h1>
+            <div>
+              <animated.div style={translate}>
+                <img
+                  style={{
+                    top: "290px",
+                    right: "400px",
+                    position: "absolute",
+                    width: "60px",
+                  }}
+                  src="/JavaScript-logo.png"
+                />
+              </animated.div>
+              <h1 className="title">&lt; useThis/&gt;</h1>
+            </div>
             <br />
-            <code>{`${useThis.toString()}`}</code>
+            <animated.div style={slide}>
+              <code
+                style={{ fontSize: "20px" }}
+              >{`${useThis.toString()}`}</code>
+            </animated.div>
           </div>
         </main>
 
@@ -90,6 +130,10 @@ export default function Home() {
         <style jsx global>{`
           html,
           body {
+            background-image: url("https://i.ya-webdesign.com/images/loading-png-gif.gif");
+            background-position: center;
+            background-size: 50px;
+            background-repeat: no-repeat;
             padding: 0;
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
