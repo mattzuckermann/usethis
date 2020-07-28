@@ -76,7 +76,7 @@ const Home = () => {
                   />
                 </animated.div>
                 <h1 className="title">
-                  &lt;<span>{data?.getThis}</span>/&gt;
+                  &lt;<span>useThis</span>/&gt;
                 </h1>
               </div>
               <br />
