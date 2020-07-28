@@ -154,6 +154,7 @@ const Home = () => {
           <style jsx global>{`
             html,
             body {
+              scroll-behavior: smooth;
               background-position: center;
               background-image: url("https://i.ya-webdesign.com/images/loading-png-gif.gif");
               background-size: 50px;
