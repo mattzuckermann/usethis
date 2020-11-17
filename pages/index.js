@@ -1,22 +1,37 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
-import gql from "graphql-tag";
 import { withApollo } from "../lib/apollo";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSpring, useChain, animated, config } from "react-spring";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
-const GET_THIS = gql`
-  query GetIt {
-    getThis
+const GET_ALL_RESULTS = gql`
+  query getAll {
+    results {
+      _id
+      score
+    }
+  }
+`;
+
+const ADD_RESULT = gql`
+  mutation addResult($result: ResultInput) {
+    addResult(result: $result) {
+      _id
+      score
+    }
   }
 `;
 
 const Home = () => {
-  const { data, loading, error } = useQuery(GET_THIS);
+  const { data, loading, error } = useQuery(GET_ALL_RESULTS);
+  const [addResult] = useMutation(ADD_RESULT, { refetchQueries: ["getAll"] });
   function useThis() {
     return "learning to use the JavaScript 'this' keyword in a variety of contexts";
   }
+
+  const [score, setScore] = useState(0);
 
   const fadeRef = useRef();
   const fade = useSpring({
@@ -49,7 +64,7 @@ const Home = () => {
       { current: translateRef.current },
       { current: slideRef.current },
     ],
-    [1.25, 2.1, 2.6]
+    [1.25, 2.0, 2.7]
   );
 
   return (
@@ -88,6 +103,51 @@ const Home = () => {
             </div>
           </main>
 
+          <h1>Insert Into Database</h1>
+          <section style={{ margin: "50px" }}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                addResult({
+                  variables: {
+                    result: {
+                      // _id: formID,
+                      score: parseInt(score),
+                    },
+                  },
+                });
+                setFormID("");
+                setScore("");
+              }}
+            >
+              <div>
+                <label htmlFor="score">Score:</label>
+              </div>
+              <input
+                name="score"
+                value={score}
+                onChange={(e) => setScore(e.target.value)}
+                type="number"
+                style={{ marginBottom: "10px" }}
+              />
+              <div>
+                <input
+                  type="submit"
+                  value="Submit"
+                  disabled={!score}
+                />
+              </div>
+            </form>
+          </section>
+          <section>
+            {data?.results.map((result) => (
+              <div key={result}>
+                <div>{result._id}</div>
+                <div>{result.score}</div>
+                <br></br>
+              </div>
+            ))}
+          </section>
           <footer>
             &copy;{new Date().getFullYear()} Matt Zuckermann. All Rights
             Reserved.
