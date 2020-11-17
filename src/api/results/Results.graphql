@@ -1,0 +1,17 @@
+type Result {
+  _id: ID!
+  score: Int!
+}
+
+input ResultInput {
+  _id: ID
+  score: Int!
+}
+
+type Mutation {
+  addResult(result: ResultInput): Result
+}
+
+type Query {
+  results: [Result]
+}
