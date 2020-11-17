@@ -1,18 +1,13 @@
-import { ApolloServer, gql } from "apollo-server-micro";
+import { ApolloServer } from "apollo-server-micro";
+import { mergeResolvers, mergeTypeDefs } from "graphql-tools";
+import connectDb from "../../lib/mongoose";
+import { resultsResolvers } from "../../src/api/results/resolvers";
+import { resultsMutations } from "../../src/api/results/mutations";
+import results from "../../src/api/results/Results.graphql";
 
-const typeDefs = gql`
-  type Query {
-    getThis: String
-  }
-`;
+const resolvers = mergeResolvers([resultsResolvers, resultsMutations]);
 
-const resolvers = {
-  Query: {
-    getThis: () => {
-      return "useThis";
-    },
-  },
-};
+const typeDefs = mergeTypeDefs([results]);
 
 const apolloServer = new ApolloServer({
   typeDefs,
@@ -25,4 +20,5 @@ export const config = {
   },
 };
 
-export default apolloServer.createHandler({ path: "/api/graphql" });
+const server = apolloServer.createHandler({ path: "/api/graphql" });
+export default connectDb(server);
