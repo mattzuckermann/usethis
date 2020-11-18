@@ -18,6 +18,7 @@ export function withApollo(PageComponent) {
     );
   };
 
+  // TODO use getServerSideProps (see: https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering)
   WithApollo.getInitialProps = async (ctx) => {
     const { AppTree } = ctx;
     const apolloClient = (ctx.apolloClient = initApolloClient());
@@ -52,13 +53,12 @@ export function withApollo(PageComponent) {
     const apolloState = apolloClient.cache.extract();
     return {
       ...pageProps,
-      apolloState,
+      // apolloState,
     };
   };
 
   return WithApollo;
 }
-
 
 const initApolloClient = (initialState = {}) => {
   const isDev = process.env.NODE_ENV !== "production";
@@ -76,6 +76,6 @@ const initApolloClient = (initialState = {}) => {
     link,
     cache,
   });
-  
+
   return client;
 };

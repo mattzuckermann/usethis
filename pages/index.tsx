@@ -24,14 +24,27 @@ const ADD_RESULT = gql`
   }
 `;
 
+const ADD_USER = gql`
+  mutation addResult($user: UserInput) {
+    addUser(user: $user) {
+      _id
+      username
+      password
+      date_joined
+    }
+  }
+`;
+
 const Home = () => {
   const { data, loading, error } = useQuery(GET_ALL_RESULTS);
   const [addResult] = useMutation(ADD_RESULT, { refetchQueries: ["getAll"] });
+  const [addUser] = useMutation(ADD_USER);
   function useThis() {
     return "learning to use the JavaScript 'this' keyword in a variety of contexts";
   }
 
-  const [score, setScore] = useState(0);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const fadeRef = useRef();
   const fade = useSpring({
@@ -103,50 +116,53 @@ const Home = () => {
             </div>
           </main>
 
-          <h1>Insert Into Database</h1>
           <section style={{ margin: "50px" }}>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                addResult({
+                addUser({
                   variables: {
                     result: {
-                      // _id: formID,
-                      score: parseInt(score),
+                      username,
+                      password,
+                      joined_date: new Date(),
                     },
                   },
                 });
-                setFormID("");
-                setScore("");
+                setUsername("");
+                setPassword("");
               }}
             >
               <div>
-                <label htmlFor="score">Score:</label>
+                <label htmlFor="username">Username:</label>
               </div>
               <input
-                name="score"
-                value={score}
-                onChange={(e) => setScore(e.target.value)}
-                type="number"
+                name="username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                type="username"
+                style={{ marginBottom: "10px" }}
+              />
+              <div>
+                <label htmlFor="password">Password:</label>
+              </div>
+              <input
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
                 style={{ marginBottom: "10px" }}
               />
               <div>
                 <input
                   type="submit"
                   value="Submit"
-                  disabled={!score}
+                  disabled={!username || !password}
                 />
               </div>
             </form>
-          </section>
-          <section>
-            {data?.results.map((result) => (
-              <div key={result}>
-                <div>{result._id}</div>
-                <div>{result.score}</div>
-                <br></br>
-              </div>
-            ))}
           </section>
           <footer>
             &copy;{new Date().getFullYear()} Matt Zuckermann. All Rights

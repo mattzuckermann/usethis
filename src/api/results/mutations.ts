@@ -10,5 +10,14 @@ export const resultsMutations = {
         console.log(e);
       }
     },
+    async removeResult(obj, { _id }, context) {
+      try {
+        await Results.deleteOne({ _id });
+        console.log(`Deleted Result ${_id}`);
+        return `Deleted Result ${_id}`;
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
 };
