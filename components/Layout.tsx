@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FC, ReactNode } from "react";
 
-export const Layout = ({ children }) => {
+const Layout: FC = (children: ReactNode) => {
   return <div>{children}</div>;
 };
 
