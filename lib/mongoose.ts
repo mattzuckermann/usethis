@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
+import { NextApiRequest, NextApiResponse } from "next";
 
-const connectDb = (handler) => async (req, res) => {
+const connectDb = (handler) => async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
   if (mongoose.connections[0].readyState !== 1) {
     await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
