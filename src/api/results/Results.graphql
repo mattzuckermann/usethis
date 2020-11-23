@@ -10,7 +10,7 @@ input ResultInput {
 
 type Mutation {
   addResult(result: ResultInput): Result
-  removeResult(ID: String): String
+  removeResult(_id: ID!): Result
 }
 
 type Query {

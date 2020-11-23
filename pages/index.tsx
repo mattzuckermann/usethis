@@ -1,16 +1,27 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { withApollo } from "../lib/apollo";
-import { useRef, useState } from "react";
+import { useRef, useState, FC } from "react";
 import { useSpring, useChain, animated, config } from "react-spring";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 const GET_ALL_RESULTS = gql`
-  query getAll {
+  query getAllResults {
     results {
       _id
       score
+    }
+  }
+`;
+
+const GET_ALL_USERS = gql`
+  query getAllUsers {
+    users {
+      _id
+      username
+      password
+      date_joined
     }
   }
 `;
@@ -24,8 +35,16 @@ const ADD_RESULT = gql`
   }
 `;
 
+const REMOVE_RESULT = gql`
+  mutation removeResult($_id: ID!) {
+    removeResult(_id: $_id) {
+      _id
+    }
+  }
+`;
+
 const ADD_USER = gql`
-  mutation addResult($user: UserInput) {
+  mutation addUser($user: UserInput) {
     addUser(user: $user) {
       _id
       username
@@ -35,18 +54,44 @@ const ADD_USER = gql`
   }
 `;
 
-const Home = () => {
+const REMOVE_USER = gql`
+  mutation removeUser($username: String!) {
+    removeUser(username: $username) {
+      _id
+      username
+      password
+      date_joined
+    }
+  }
+`;
+
+const Home: FC = () => {
   const { data, loading, error } = useQuery(GET_ALL_RESULTS);
-  const [addResult] = useMutation(ADD_RESULT, { refetchQueries: ["getAll"] });
-  const [addUser] = useMutation(ADD_USER);
+  const { data: dataU, loading: loadingU, error: errorU } = useQuery(
+    GET_ALL_USERS
+  );
+  const [addResult] = useMutation(ADD_RESULT, {
+    refetchQueries: ["getAllResults"],
+  });
+  const [removeResult] = useMutation(REMOVE_RESULT, {
+    refetchQueries: ["getAllResults"],
+  });
+  const [addUser] = useMutation(ADD_USER, {
+    refetchQueries: ["getAllUsers"],
+  });
+  const [removeUser] = useMutation(REMOVE_USER, {
+    refetchQueries: ["getAllUsers"],
+  });
+
   function useThis() {
     return "learning to use the JavaScript 'this' keyword in a variety of contexts";
   }
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [score, setScore] = useState(0);
 
-  const fadeRef = useRef();
+  const fadeRef = useRef(null!);
   const fade = useSpring({
     from: { opacity: 0 },
     opacity: 1,
@@ -54,7 +99,7 @@ const Home = () => {
     ref: fadeRef,
   });
 
-  const translateRef = useRef();
+  const translateRef = useRef(null!);
   const translate = useSpring({
     from: { opacity: 0 },
     opacity: 1,
@@ -62,7 +107,7 @@ const Home = () => {
     ref: translateRef,
   });
 
-  const slideRef = useRef();
+  const slideRef = useRef(null!);
   const slide = useSpring({
     from: { opacity: 0, transform: "translateY(-100%)" },
     opacity: 1,
@@ -116,16 +161,18 @@ const Home = () => {
             </div>
           </main>
 
-          <section style={{ margin: "50px" }}>
+          <h1>ADD USER</h1>
+          <section>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                const date_joined = new Date();
                 addUser({
                   variables: {
-                    result: {
+                    user: {
                       username,
                       password,
-                      joined_date: new Date(),
+                      date_joined,
                     },
                   },
                 });
@@ -164,6 +211,121 @@ const Home = () => {
               </div>
             </form>
           </section>
+          {loadingU ? (
+            <section>LOADING...</section>
+          ) : (
+            <section>
+              <h1>USERS</h1>
+              {dataU?.users.map(
+                (
+                  user: {
+                    _id: string;
+                    username: string;
+                    password: string;
+                    date_joined: Date;
+                  },
+                  index: string
+                ) => {
+                  const { _id, username, date_joined } = user;
+                  return (
+                    <div key={_id}>
+                      <span>{index + 1}. ) </span>
+                      <span>{_id} </span>
+                      <span>{username} </span>
+                      <span>{date_joined} </span>
+                      <span>
+                        <button
+                          onClick={() => {
+                            try {
+                              removeUser({
+                                variables: {
+                                  username,
+                                },
+                              });
+                            } catch (e) {
+                              console.log(e);
+                            }
+                          }}
+                        >
+                          X
+                        </button>
+                      </span>
+                      <br></br>
+                    </div>
+                  );
+                }
+              )}
+            </section>
+          )}
+          {/* NEXT FORM */}
+          <h1 style={{ marginTop: "80px" }}>ADD RESULT</h1>
+          <section>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                addResult({
+                  variables: {
+                    result: {
+                      score,
+                    },
+                  },
+                });
+                setScore(0);
+              }}
+            >
+              <div>
+                <label htmlFor="score">Score:</label>
+              </div>
+              <input
+                name="score"
+                placeholder="Score"
+                value={score}
+                type="number"
+                onChange={(e) => setScore(parseInt(e.target.value))}
+              />
+              <div>
+                <input type="submit" value="Submit" disabled={!score} />
+              </div>
+            </form>
+          </section>
+
+          {loading ? (
+            <section>LOADING...</section>
+          ) : (
+            <section>
+              <h1>RESULTS</h1>
+              {data?.results.map(
+                (result: { _id: string; score: number }, index: string) => {
+                  const { _id, score } = result;
+                  return (
+                    <div key={_id}>
+                      <span>{index + 1}. ) </span>
+                      <span>{_id} </span>
+                      <span>{score} </span>
+                      <span>
+                        <button
+                          onClick={() => {
+                            try {
+                              removeResult({
+                                variables: {
+                                  _id,
+                                },
+                              });
+                            } catch (e) {
+                              console.log(e);
+                            }
+                          }}
+                        >
+                          X
+                        </button>
+                      </span>
+                      <br></br>
+                    </div>
+                  );
+                }
+              )}
+            </section>
+          )}
           <footer>
             &copy;{new Date().getFullYear()} Matt Zuckermann. All Rights
             Reserved.

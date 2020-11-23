@@ -10,11 +10,21 @@ export const resultsMutations = {
         console.log(e);
       }
     },
-    async removeResult(obj, { _id }, context) {
+    async removeResult(obj: {}, { _id }: { _id: any }, context: {}) {
       try {
-        await Results.deleteOne({ _id });
-        console.log(`Deleted Result ${_id}`);
-        return `Deleted Result ${_id}`;
+        let deletedResult = (await Results.findOne({ _id })) || {
+          _id: "result doesn't exist",
+          score: 0,
+        };
+        if (deletedResult) {
+          await Results.deleteOne({ _id });
+          console.log(`
+==========================================
+Deleted Result ID ${_id}
+==========================================
+`);
+        }
+        return deletedResult;
       } catch (e) {
         console.log(e);
       }
