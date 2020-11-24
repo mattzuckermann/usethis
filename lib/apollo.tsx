@@ -7,8 +7,20 @@ import {
 import Head from "next/head";
 import fetch from "isomorphic-unfetch";
 
-export function withApollo(PageComponent) {
-  const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
+type WithApolloProps = {
+  apolloClient: {
+    ctx: {};
+  };
+  apolloState: {};
+  pageProps: {};
+};
+
+export function withApollo(PageComponent: any) {
+  const WithApollo = ({
+    apolloClient,
+    apolloState,
+    ...pageProps
+  }: WithApolloProps) => {
     const client = apolloClient || initApolloClient(apolloState);
 
     return (
@@ -18,8 +30,11 @@ export function withApollo(PageComponent) {
     );
   };
 
-  // TODO use getServerSideProps (see: https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering)
-  WithApollo.getInitialProps = async (ctx) => {
+  WithApollo.getInitialProps = async (ctx: {
+    AppTree: {};
+    apolloClient: {};
+    res: { finished: boolean };
+  }) => {
     const { AppTree } = ctx;
     const apolloClient = (ctx.apolloClient = initApolloClient());
 
@@ -53,7 +68,7 @@ export function withApollo(PageComponent) {
     const apolloState = apolloClient.cache.extract();
     return {
       ...pageProps,
-      // apolloState,
+      apolloState,
     };
   };
 
