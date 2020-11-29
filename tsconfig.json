@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": false,
+    "lib": ["es6", "dom", "dom.iterable", "esnext"],
+    "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -14,6 +17,16 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "assets/jss/nextjs-material-kit-pro/components/headerStyle.js",
+    "assets/jss/nextjs-material-kit-pro/components/headerLinksStyle.js",
+    "assets/jss/nextjs-material-kit-pro/components/customDropdownStyle.js",
+    "assets/jss/nextjs-material-kit-pro/components/buttonStyle.js",
+    "assets/jss/nextjs-material-kit-pro.js",
+    "assets/jss/nextjs-material-kit-pro/tooltipsStyle.js", "lib/apollo.tsx"
+  ],
   "exclude": ["node_modules"]
 }
