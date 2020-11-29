@@ -7,34 +7,18 @@ import {
 import Head from "next/head";
 import fetch from "isomorphic-unfetch";
 
-type WithApolloProps = {
-  apolloClient: {
-    ctx: {};
-  };
-  apolloState: {};
-  pageProps: {};
-};
-
-export function withApollo(PageComponent: any) {
-  const WithApollo = ({
-    apolloClient,
-    apolloState,
-    ...pageProps
-  }: WithApolloProps) => {
+export function withApollo(PageComponent) {
+  const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApolloClient(apolloState);
 
     return (
-      <ApolloProvider client={client as any}>
+      <ApolloProvider client={client}>
         <PageComponent {...pageProps} />
       </ApolloProvider>
     );
   };
 
-  WithApollo.getInitialProps = async (ctx: {
-    AppTree: {};
-    apolloClient: {};
-    res: { finished: boolean };
-  }) => {
+  WithApollo.getInitialProps = async (ctx) => {
     const { AppTree } = ctx;
     const apolloClient = (ctx.apolloClient = initApolloClient());
 
