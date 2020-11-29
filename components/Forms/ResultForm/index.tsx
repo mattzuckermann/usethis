@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import CardHeader from "../../Card/CardHeader";
+import ListItem from "@material-ui/core/ListItem";
 
 const ADD_RESULT = gql`
   mutation addResult($result: ResultInput) {
@@ -18,8 +20,8 @@ const ResultForm = () => {
   });
   return (
     <div>
-      <h1 style={{ marginTop: "80px" }}>ADD RESULT</h1>
-      <section>
+      <CardHeader color="primary">ADD RESULT</CardHeader>
+      <ListItem>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -38,6 +40,7 @@ const ResultForm = () => {
           </div>
           <input
             name="score"
+            style={{ marginBottom: "10px", width: "150px" }}
             placeholder="Score"
             value={score}
             min={0}
@@ -49,7 +52,7 @@ const ResultForm = () => {
             <input type="submit" value="Submit" disabled={!score} />
           </div>
         </form>
-      </section>
+      </ListItem>
     </div>
   );
 };

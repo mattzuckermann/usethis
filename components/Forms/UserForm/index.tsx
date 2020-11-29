@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import CardHeader from "../../Card/CardHeader";
+import ListItem from "@material-ui/core/ListItem";
 
 const ADD_USER = gql`
   mutation addUser($user: UserInput) {
@@ -22,8 +24,8 @@ const UserForm = () => {
 
   return (
     <div>
-      <h1>ADD USER</h1>
-      <section>
+      <CardHeader color="primary">ADD USER</CardHeader>
+      <ListItem>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -71,7 +73,7 @@ const UserForm = () => {
             />
           </div>
         </form>
-      </section>
+      </ListItem>
     </div>
   );
 };

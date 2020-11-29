@@ -1,14 +1,14 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const GET_ALL_USERS = gql`
   query getAllUsers {
     users {
-      _id
       username
-      password
-      date_joined
     }
   }
 `;
@@ -34,26 +34,21 @@ const index = () => {
       {loading ? (
         <section>LOADING...</section>
       ) : (
-        <section>
-          <h1>USERS</h1>
+        <List>
           {data?.users.map(
             (
               user: {
-                _id: string;
                 username: string;
-                password: string;
                 date_joined: string;
               },
               index: string
             ) => {
-              const { _id, username, date_joined } = user;
+              const { username, date_joined } = user;
+              // const date_joined = new Date(user.date_joined);
               return (
-                <div key={index}>
-                  <span>{index + 1}. ) </span>
-                  <span>{_id} </span>
-                  <span>{username} </span>
-                  <span>{date_joined} </span>
-                  <span>
+                <ListItem key={index}>
+                  <ListItemText>
+                    {index + 1}. {username}{" "}
                     <button
                       onClick={() => {
                         try {
@@ -69,13 +64,12 @@ const index = () => {
                     >
                       X
                     </button>
-                  </span>
-                  <br></br>
-                </div>
+                  </ListItemText>
+                </ListItem>
               );
             }
           )}
-        </section>
+        </List>
       )}
     </div>
   );

@@ -1,6 +1,9 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const GET_ALL_RESULTS = gql`
   query getAllResults {
@@ -29,17 +32,14 @@ const index = () => {
       {loading ? (
         <section>LOADING...</section>
       ) : (
-        <section>
-          <h1>RESULTS</h1>
+        <List style={{ width: "800px" }}>
           {data?.results.map(
             (result: { _id: string; score: number }, index: string) => {
               const { _id, score } = result;
               return (
-                <div key={index}>
-                  <span>{index + 1}. ) </span>
-                  <span>{_id} </span>
-                  <span>{score} / 100 </span>
-                  <span>
+                <ListItem key={index}>
+                  <ListItemText>
+                    {index + 1}. {score}/100{" "}
                     <button
                       onClick={() => {
                         try {
@@ -55,13 +55,12 @@ const index = () => {
                     >
                       X
                     </button>
-                  </span>
-                  <br></br>
-                </div>
+                  </ListItemText>
+                </ListItem>
               );
             }
           )}
-        </section>
+        </List>
       )}
     </div>
   );
