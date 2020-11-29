@@ -4,7 +4,7 @@ import Users from "./users";
 
 export const usersResolvers = {
   Query: {
-    async user({ _id }) {
+    async user({ _id }: { _id: string }) {
       const user = await Users.findOne({ _id });
       return user;
     },

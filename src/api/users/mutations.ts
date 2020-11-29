@@ -2,7 +2,20 @@ import Users from "./users";
 
 export const usersMutations = {
   Mutation: {
-    async addUser(obj, { user }, context) {
+    async addUser(
+      obj: {},
+      {
+        user,
+      }: {
+        user: {
+          _id: string;
+          username: string;
+          password: string;
+          date_joined: Date;
+        };
+      },
+      context: {}
+    ) {
       try {
         const newUser = await Users.create(user);
         await console.log(`

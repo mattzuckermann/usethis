@@ -1,8 +1,8 @@
 import {
-  ApolloProvider,
   ApolloClient,
   createHttpLink,
   InMemoryCache,
+  ApolloProvider,
 } from "@apollo/client";
 import Head from "next/head";
 import fetch from "isomorphic-unfetch";
@@ -24,7 +24,7 @@ export function withApollo(PageComponent: any) {
     const client = apolloClient || initApolloClient(apolloState);
 
     return (
-      <ApolloProvider client={client}>
+      <ApolloProvider client={client as any}>
         <PageComponent {...pageProps} />
       </ApolloProvider>
     );
