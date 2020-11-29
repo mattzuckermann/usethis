@@ -2,9 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import { useSpring, useChain, animated, config } from "react-spring";
 
 const SplashAnimation = () => {
-  function useThis() {
-    return "learning to use the JavaScript 'this' keyword in a variety of contexts";
-  }
+  const useThis = () =>
+    "learning to use the JavaScript 'this' keyword in a variety of contexts";
 
   const [loaded, setLoaded] = useState(false);
 
@@ -12,7 +11,7 @@ const SplashAnimation = () => {
   const fade = useSpring({
     from: { opacity: 0 },
     opacity: 1,
-    config: config.molasses,
+    config: config.slow,
     ref: fadeRef,
   });
 
@@ -20,7 +19,7 @@ const SplashAnimation = () => {
   const translate = useSpring({
     from: { opacity: 0 },
     opacity: 1,
-    config: config.molasses,
+    config: config.gentle,
     ref: translateRef,
   });
 
@@ -29,7 +28,7 @@ const SplashAnimation = () => {
     from: { opacity: 0, transform: "translateY(-100%)" },
     opacity: 1,
     transform: "translateY(0%)",
-    config: config.slow,
+    config: config.gentle,
     ref: slideRef,
   });
 
@@ -41,7 +40,7 @@ const SplashAnimation = () => {
           { current: slideRef.current },
         ]
       : [],
-    [0.5, 1.0, 1.7]
+    [0.2, 0.9, 1.2]
   );
 
   useEffect(() => {
@@ -51,38 +50,41 @@ const SplashAnimation = () => {
   return (
     <main className="container">
       <animated.div style={fade}>
-        <animated.div style={translate}>
-          <img
-            style={{
-              top: "290px",
-              right: "400px",
-              position: "absolute",
-              width: "60px",
-            }}
-            src="/JavaScript-logo.png"
-          />
-        </animated.div>
-        <h1 className="title">
-          &lt;<code style={{ fontSize: "9rem" }}>useThis</code>/&gt;
-        </h1>
-        <animated.div style={slide}>
-          <code style={{ fontSize: "20px" }}>{`${useThis.toString()}`}</code>
-        </animated.div>
+        <div>
+          <h1 className="title" style={{ position: "relative" }}>
+            &lt;
+            <code style={{ fontSize: "9rem" }}>useThis</code>
+            /&gt;
+            <animated.div style={translate}>
+              <img
+                style={{
+                  position: "absolute",
+                  top: "-20px",
+                  right: "-20px",
+                  width: "60px",
+                }}
+                src="/JavaScript-logo.png"
+              />
+            </animated.div>
+          </h1>
+        </div>
+      </animated.div>
+      <animated.div style={slide}>
+        <code style={{ fontSize: "1rem" }}>{`${useThis.toString()}`}</code>
       </animated.div>
       <style jsx>{`
         code {
           border-radius: 5px;
           padding: 0.75rem;
           font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+          font-family: Inconsolata, Menlo, Monaco, Lucida Console,
+            Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+            Courier New, monospace;
           color: white;
-          font-family: "Consolas, monospace";
         }
         .container {
           background-image: url("/background.png");
-          background-size: 100vw;
-          background-repeat: no-repeat;
+          background-size: 100vw 150vh;
           padding: 0 0.5rem;
           display: flex;
           flex-direction: column;
