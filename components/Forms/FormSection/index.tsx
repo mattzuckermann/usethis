@@ -16,13 +16,13 @@ const index = () => {
     >
       <div style={{ position: "relative", zIndex: 1 }}>
         <GridContainer spacing={10}>
-          <GridItem xs={6}>
+          <GridItem md={6} xs={12}>
             <Card>
               <UserForm />
               <UserList />
             </Card>
           </GridItem>
-          <GridItem xs={6}>
+          <GridItem md={6} xs={12}>
             <Card>
               <ResultForm />
               <ResultList />
@@ -36,7 +36,6 @@ const index = () => {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          align-items: center;
         }
       `}</style>
     </div>

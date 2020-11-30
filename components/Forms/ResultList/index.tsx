@@ -32,7 +32,7 @@ const index = () => {
       {loading ? (
         <section>LOADING...</section>
       ) : (
-        <List style={{ width: "800px" }}>
+        <List>
           {data?.results.map(
             (result: { _id: string; score: number }, index: string) => {
               const { _id, score } = result;
