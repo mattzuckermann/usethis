@@ -2,8 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useSpring, useChain, animated, config } from "react-spring";
 
 const SplashAnimation = () => {
-  const useThis = () =>
-    "learning to use the JavaScript 'this' keyword in a variety of contexts";
+  const useThis = () => "mastering JavaScript's 'this' keyword";
 
   const [loaded, setLoaded] = useState(false);
 
@@ -48,12 +47,15 @@ const SplashAnimation = () => {
   });
 
   return (
-    <main className="container">
+    <main>
       <animated.div style={fade}>
         <div>
-          <h1 className="title" style={{ position: "relative" }}>
+          <h1
+            className="title"
+            style={{ position: "relative", fontSize: "9rem" }}
+          >
             &lt;
-            <code style={{ fontSize: "9rem" }}>useThis</code>
+            <code>useThis</code>
             /&gt;
             <animated.div style={translate}>
               <img
@@ -61,7 +63,7 @@ const SplashAnimation = () => {
                   position: "absolute",
                   top: "-20px",
                   right: "-20px",
-                  width: "60px",
+                  width: "4rem",
                 }}
                 src="/JavaScript-logo.png"
               />
@@ -70,28 +72,27 @@ const SplashAnimation = () => {
         </div>
       </animated.div>
       <animated.div style={slide}>
-        <code style={{ fontSize: "1rem" }}>{`${useThis.toString()}`}</code>
+        <code style={{ fontSize: "1.5rem" }}>{`${useThis.toString()}`}</code>
       </animated.div>
       <style jsx>{`
         code {
           border-radius: 5px;
           padding: 0.75rem;
-          font-size: 1.1rem;
           font-family: Inconsolata, Menlo, Monaco, Lucida Console,
             Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,
             Courier New, monospace;
           color: white;
         }
         .container {
-          background-image: url("/background.png");
-          background-size: 100vw 150vh;
-          padding: 0 0.5rem;
+          flex: 1;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
         }
         main {
+          background-image: url("/background.png");
+          background-size: 100vw 150vh;
           padding: 5rem 0;
           flex: 1;
           display: flex;
