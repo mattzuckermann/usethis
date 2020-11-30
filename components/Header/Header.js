@@ -66,28 +66,26 @@ export default function Header(props) {
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
         <div className={classes.title}>{brand}</div>
-        {links.map((link, index) => (
-          <Hidden
-            key={index}
-            smDown
-            implementation="css"
-            className={classes.hidden}
-          >
-            <Button size="medium">
-              <Link href={link.path}>
-                <a
-                  target={link.targetBlank ? "_blank" : ""}
-                  rel={link.targetBlank ? "noopener noreferrer" : ""}
-                  className="noStyle"
-                >
-                  {link.name}
-                </a>
-              </Link>
-            </Button>
-          </Hidden>
-        ))}
+        <div style={{ flexGrow: 1 }} />
+        <Hidden>
+          {links.map((link, index) => (
+            <Hidden key={index} xsDown implementation="css">
+              <Button size="large">
+                <Link href={link.path}>
+                  <a
+                    target={link.targetBlank ? "_blank" : ""}
+                    rel={link.targetBlank ? "noopener noreferrer" : ""}
+                    className="noStyle"
+                  >
+                    {link.name}
+                  </a>
+                </Link>
+              </Button>
+            </Hidden>
+          ))}
+        </Hidden>
 
-        <Hidden mdUp>
+        <Hidden smUp>
           <IconButton
             color="inherit"
             aria-label="open drawer"
