@@ -61,7 +61,8 @@ export function withApollo(PageComponent) {
 
 const initApolloClient = (initialState = {}) => {
   const isDev = process.env.NODE_ENV !== "production";
-  const url = isDev ? "http://localhost:3000" : "https://usethis.dev";
+  const url = isDev ? "http://localhost:3000" : "http://localhost:3000";
+  // const url = isDev ? "http://localhost:3000" : "https://usethis.dev";
 
   const ssrMode = typeof window === "undefined";
   const link = new createHttpLink({
