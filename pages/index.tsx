@@ -7,7 +7,6 @@ import FormSection from "../components/Forms/FormSection";
 import Footer from "../components/Footer";
 
 const linkArray = [
-  { name: "API", path: "/api/graphql", targetBlank: true },
   { name: "Login", path: "/login", targetBlank: false },
   { name: "Study", path: "/study", targetBlank: false },
   { name: "Test", path: "/test", targetBlank: false },
