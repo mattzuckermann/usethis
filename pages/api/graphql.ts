@@ -1,7 +1,7 @@
 import { ApolloServer } from "apollo-server-micro";
 import { mergeResolvers, mergeTypeDefs } from "graphql-tools";
 import connectDb from "../../lib/mongoose";
-import results from "../../src/api/results/results.graphql";
+import results from "../../src/api/results/Results.graphql";
 import { resultsResolvers } from "../../src/api/results/resolvers";
 import { resultsMutations } from "../../src/api/results/mutations";
 import users from "../../src/api/users/users.graphql";
