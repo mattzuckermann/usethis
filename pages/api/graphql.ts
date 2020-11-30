@@ -4,7 +4,7 @@ import connectDb from "../../lib/mongoose";
 import results from "../../src/api/results/Results.graphql";
 import { resultsResolvers } from "../../src/api/results/resolvers";
 import { resultsMutations } from "../../src/api/results/mutations";
-import users from "../../src/api/users/users.graphql";
+import users from "../../src/api/users/Users.graphql";
 import { usersResolvers } from "../../src/api/users/resolvers";
 import { usersMutations } from "../../src/api/users/mutations";
 
