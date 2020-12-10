@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { withApollo } from "../lib/apollo";
 import { Provider } from "next-auth/client";
+import "reflect-metadata";
 
 export default function App({ Component, pageProps }) {
   const WrappedComponent = withApollo(Component);
