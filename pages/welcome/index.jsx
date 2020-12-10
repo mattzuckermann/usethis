@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getSession } from "next-auth/client";
 
-type Props = {
-  user: {
-    email: string;
-    image: string;
-    name: string;
-  };
-};
-
-const index = ({ user }: Props) => {
+const index = () => {
+  useEffect(() => {
+    setTimeout(function () {
+      location.replace("/study");
+    }, 5000);
+  }, []);
   return (
     <div className="layout">
-      <div>Let's test!</div>
+      <div>
+        Welcome to useThis.js! You will automatically be directed to the study
+        page in five seconds to get started!
+      </div>
     </div>
   );
 };

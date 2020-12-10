@@ -11,7 +11,13 @@ type Props = {
 
 const index = ({ user }: Props) => {
   console.log(user);
-  return <div className="layout">Let's study!</div>;
+  return (
+    <div className="layout">
+      {user.profile
+        ? `This is your profile, ${user.name}!`
+        : "This is your profile!"}
+    </div>
+  );
 };
 
 export default index;
