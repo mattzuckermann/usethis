@@ -1,5 +1,5 @@
 import SplashAnimation from "../components/SplashAnimation";
-import FormSection from "../components/Forms/FormSection";
+import FormSection from "../components/Form/FormSection";
 
 const Home = () => (
   <section>

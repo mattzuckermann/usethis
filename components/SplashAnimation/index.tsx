@@ -2,8 +2,6 @@ import { useRef, useState, useEffect } from "react";
 import { useSpring, useChain, animated, config } from "react-spring";
 
 const SplashAnimation = () => {
-  const useThis = () => "mastering JavaScript's 'this' keyword";
-
   const [loaded, setLoaded] = useState(false);
 
   const fadeRef = useRef(null!);
@@ -47,69 +45,28 @@ const SplashAnimation = () => {
   });
 
   return (
-    <main>
+    <main className="splashContainer">
       <animated.div style={fade}>
-        <div>
-          <h1
-            className="title"
-            style={{ position: "relative", fontSize: "9rem" }}
-          >
-            &lt;
-            <code>useThis</code>
-            /&gt;
-            <animated.div style={translate}>
-              <img
-                style={{
-                  position: "absolute",
-                  top: "-20px",
-                  right: "-20px",
-                  width: "4rem",
-                }}
-                src="/JavaScript-logo.png"
-              />
-            </animated.div>
-          </h1>
-        </div>
+        <h1 style={{ position: "relative" }}>
+          <code>&lt;useThis/&gt;</code>
+          <animated.div style={translate}>
+            <img
+              style={{
+                position: "absolute",
+                top: "-70px",
+                right: "-80px",
+                width: "2em",
+              }}
+              src="/JavaScript-logo.png"
+            />
+          </animated.div>
+        </h1>
       </animated.div>
       <animated.div style={slide}>
-        <code style={{ fontSize: "1.5rem" }}>{`${useThis.toString()}`}</code>
+        <code style={{ fontSize: "2rem" }}>
+          mastering JavaScript's 'this' keyword
+        </code>
       </animated.div>
-      <style jsx>{`
-        code {
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-family: Inconsolata, Menlo, Monaco, Lucida Console,
-            Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,
-            Courier New, monospace;
-          color: white;
-        }
-        .container {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        main {
-          background-image: url("/background.png");
-          background-size: 100vw 150vh;
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-        }
-        .title {
-          margin: 0;
-          color: white;
-          line-height: 1.15;
-          font-size: 9rem;
-          font-family: "Menlo";
-          text-align: center;
-        }
-      `}</style>
     </main>
   );
 };
