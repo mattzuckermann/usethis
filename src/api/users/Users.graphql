@@ -2,21 +2,23 @@ scalar Date
 
 type User {
   _id: ID!
-  username: String!
-  password: String!
-  date_joined: Date!
+  name: String!
+  image: String!
+  createdAt: Date!
+  updatedAt: Date!
 }
 
 input UserInput {
   _id: ID
-  username: String!
-  password: String!
-  date_joined: Date!
+  name: String!
+  image: String!
+  createdAt: Date!
+  updatedAt: Date!
 }
 
 type Mutation {
   addUser(user: UserInput): User
-  removeUser(username: String!): User
+  removeUser(_id: ID!): User
 }
 
 type Query {

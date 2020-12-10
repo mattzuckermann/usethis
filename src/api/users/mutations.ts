@@ -9,9 +9,11 @@ export const usersMutations = {
       }: {
         user: {
           _id: string;
-          username: string;
-          password: string;
-          date_joined: Date;
+          name: string;
+          email: string;
+          image: string;
+          createdAt: Date;
+          updatedAt: Date;
         };
       },
       context: {}
@@ -20,7 +22,7 @@ export const usersMutations = {
         const newUser = await Users.create(user);
         await console.log(`
 ====================
-Added User ${user.username}
+Added User ${user.name}
 ====================
 `);
         return newUser;
@@ -28,18 +30,19 @@ Added User ${user.username}
         console.log(e);
       }
     },
-    async removeUser(obj: {}, { username }: { username: string }, context: {}) {
+    async removeUser(obj: {}, { email }: { email: string }, context: {}) {
       try {
-        let deletedUser = (await Users.findOne({ username })) || {
+        let deletedUser = (await Users.findOne({ email })) || {
           _id: "user doesn't exist",
-          username: "user doesn't exist",
-          password: "user doesn't exist",
+          name: "user doesn't exist",
+          email: "user doesn't exist",
+          image: "user doesn't exist",
         };
         if (deletedUser) {
-          await Users.deleteOne({ username });
+          await Users.deleteOne({ email });
           console.log(`
 ========================================
-Deleted User ${username}
+Deleted User ${email}
 ========================================
 `);
         }

@@ -1,16 +1,23 @@
 import mongoose, { Schema } from "mongoose";
 
 export const UsersSchema = new Schema({
-  username: {
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
     type: String,
     required: true,
     unique: true,
   },
-  password: {
+  image: {
     type: String,
     required: true,
   },
-  date_joined: {
+  createdAt: {
+    type: Date,
+  },
+  updatedAt: {
     type: Date,
   },
 });
