@@ -21,12 +21,13 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "assets/jss/nextjs-material-kit-pro/components/headerStyle.js",
-    "assets/jss/nextjs-material-kit-pro/components/headerLinksStyle.js",
-    "assets/jss/nextjs-material-kit-pro/components/customDropdownStyle.js",
-    "assets/jss/nextjs-material-kit-pro/components/buttonStyle.js",
-    "assets/jss/nextjs-material-kit-pro.js",
-    "assets/jss/nextjs-material-kit-pro/tooltipsStyle.js", "lib/apollo.jsx"
+    "assets/jss/nextjs-material-kit-pro/tooltipsStyle.js",
+    "lib/apollo.jsx",
+    "components/Header/LoggedOut.jsx",
+    "components/Header/LoggedIn.jsx",
+    "pages/index.jsx",
+    "components/Unauthenticated/index.jsx",
+    "components/Authenticated/index.jsx"
   ],
   "exclude": ["node_modules"]
 }
