@@ -1,9 +1,10 @@
 import {
+  ApolloProvider,
   ApolloClient,
   createHttpLink,
   InMemoryCache,
-  ApolloProvider,
 } from "@apollo/client";
+import { ApolloProvider as ApolloHooksProvider } from "@apollo/react-hooks";
 import Head from "next/head";
 import fetch from "isomorphic-unfetch";
 
@@ -13,7 +14,9 @@ export function withApollo(PageComponent) {
 
     return (
       <ApolloProvider client={client}>
-        <PageComponent {...pageProps} />
+        <ApolloHooksProvider client={client}>
+          <PageComponent {...pageProps} />
+        </ApolloHooksProvider>
       </ApolloProvider>
     );
   };
