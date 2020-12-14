@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap');
 
 body {
   /* COLORS */
@@ -8,6 +8,7 @@ body {
   --green: #f3cf80;
   --red: #ff5470;
   --blue: #b8c1ec;
+  --blueRGB: 184, 193, 236;
   --darkBlue: #232946;
   --grey: #eebbc3;
   /* INTENTIONS */
@@ -15,8 +16,8 @@ body {
   --background: var(--darkblue);
   --javaScriptYellow: var(--yellow);
   --paragraph: var(--blue);
-  --buttonTextColor: var(--darkblue);
   --buttonColor: var(--green);
+  --buttonTextColor: var(--black);
   --headline: var(--white);
   --danger: var(--red);
   --cardBg: var(--blue);
@@ -49,7 +50,7 @@ body {
   --borderRadius: 10px;
 
   background-color: var(--darkBlue);
-  background-image: url("/Homepage.webp");
+  background-image: url('/Homepage.webp');
   font-family: var(--bodyFont);
   color: var(--white);
 }
@@ -109,7 +110,7 @@ header {
 div > a {
   color: white;
   text-decoration: none;
-  border-bottom: 2px solid var(--blue);
+  background-image: linear-gradient(180deg, transparent 70%, var(--blue) 0);
 }
 
 footer {
@@ -149,6 +150,7 @@ label {
 
 input,
 textarea {
+  margin: 10px 0px;
   padding: 4px 5px;
   border: var(--line);
   border-radius: 4px;
@@ -175,6 +177,7 @@ button {
   appearance: none;
   color: var(--buttonTextColor);
   background-color: var(--buttonColor);
+  margin: 10px 0px;
   border: none;
   border-radius: 10px;
   padding: 5px 25px;
@@ -213,7 +216,7 @@ button.small {
 
 /* Specialty classes */
 .card {
-  background-color: var(--white);
+  background-color: var(--black);
   padding: 3rem;
   border-radius: 1rem;
   box-shadow: var(--level-3);
@@ -238,9 +241,9 @@ button.small {
   justify-content: center;
   &::before,
   &::after {
-    content: "";
-    flex: 0.5;
-    border-bottom: 1px solid var(--black);
+    content: '';
+    flex: 0.4;
+    border-bottom: 1px solid var(--white);
   }
   &::before {
     margin-right: 1rem;
@@ -252,7 +255,7 @@ button.small {
 .splashContainer {
   color: var(--black);
   text-shadow: 8px 1px var(--javaScriptYellow);
-  background-image: url("/background.png");
+  background-image: url('/background.png');
   background-size: 100vw 150vh;
   display: flex;
   flex-direction: column;
@@ -271,6 +274,10 @@ button.small {
   --blue: #3da9fc;
   --darkBlue: #7f5af0;
   --grey: #a7a9be;
+}
+.text-shortened {
+  width: 65%;
+  margin: 10px 0px 0px 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
