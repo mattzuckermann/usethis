@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "allowJs": true,
+    "baseUrl": "http://localhost:3000",
+    "allowJs": false,
     "alwaysStrict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -19,11 +20,9 @@
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": false,
-    "target": "es5"
+    "target": "es5",
+    "types": ["cypress", "jest"]
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"],
-  "rules": {
-    "@typescript-eslint/no-non-null-assertion": "off"
-  }
+  "include": ["**/*.ts", "**/*.tsx", "cypress/plugins/index.js"]
 }

@@ -196,7 +196,7 @@ button[disabled] {
 /* .cancel can mean anything */
 button.cancel {
   --buttonColor: var(--danger);
-  --textColor: white;
+  --buttonTextColor: white;
 }
 button.small {
   font-size: var(--smallText);
@@ -242,7 +242,7 @@ button.small {
   &::before,
   &::after {
     content: '';
-    flex: 0.4;
+    flex: 1;
     border-bottom: 1px solid var(--white);
   }
   &::before {
@@ -263,6 +263,10 @@ button.small {
   align-items: center;
   height: 100vh;
 }
+.text-shortened {
+  width: 79%;
+  margin: 10px 0px 0px 10px;
+}
 
 /* Dark theme */
 .dark {
@@ -274,10 +278,6 @@ button.small {
   --blue: #3da9fc;
   --darkBlue: #7f5af0;
   --grey: #a7a9be;
-}
-.text-shortened {
-  width: 65%;
-  margin: 10px 0px 0px 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
