@@ -1,9 +1,10 @@
-import Results from "./results";
+import Results from './results';
+import { Result } from '../../@types/schema';
 
 export const resultsMutations = {
   Mutation: {
     async addResult(
-      obj: {},
+      _: null,
       {
         result,
       }: {
@@ -11,9 +12,8 @@ export const resultsMutations = {
           _id: string;
           score: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
         };
-      },
-      context: {}
-    ) {
+      }
+    ): Promise<Result> {
       try {
         const newResult = await Results.create(result);
         return newResult;
@@ -21,9 +21,9 @@ export const resultsMutations = {
         console.log(e);
       }
     },
-    async removeResult(obj: {}, { _id }: { _id: string }, context: {}) {
+    async removeResult(_: null, { _id }: { _id: string }): Promise<Result> {
       try {
-        let deletedResult = (await Results.findOne({ _id })) || {
+        const deletedResult = (await Results.findOne({ _id })) || {
           _id: "result doesn't exist",
           score: 0,
         };

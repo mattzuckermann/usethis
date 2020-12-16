@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
 export const ResultsSchema = new Schema({
   score: {
@@ -8,4 +8,4 @@ export const ResultsSchema = new Schema({
 });
 
 export default mongoose.models.results ||
-  mongoose.model("results", ResultsSchema);
+  mongoose.model('results', ResultsSchema);

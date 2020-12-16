@@ -1,9 +1,8 @@
-import mongoose from "mongoose";
-import { NextApiRequest, NextApiResponse } from "next";
+import mongoose from 'mongoose';
 
 const connectDb = (
-  handler: (req: NextApiRequest, res: NextApiResponse) => {}
-) => async (req: NextApiRequest, res: NextApiResponse) => {
+  handler: (req: string, res: string) => Promise<void>
+) => async (req: string, res: string): Promise<void> => {
   if (mongoose.connections[0].readyState !== 1) {
     await mongoose.connect(process.env.MONGO_URL!, {
       useNewUrlParser: true,
@@ -15,8 +14,8 @@ const connectDb = (
 
 const db = mongoose.connection;
 
-db.once("open", () => {
-  console.log("Connected to mongo");
+db.once('open', () => {
+  console.log('Connected to mongo');
 });
 
 export default connectDb;

@@ -1,9 +1,10 @@
-import Users from "./users";
+import Users from './users';
+import { User } from '../../@types/schema';
 
 export const usersMutations = {
   Mutation: {
     async addUser(
-      obj: {},
+      _: null,
       {
         user,
       }: {
@@ -15,9 +16,8 @@ export const usersMutations = {
           createdAt: Date;
           updatedAt: Date;
         };
-      },
-      context: {}
-    ) {
+      }
+    ): Promise<User | undefined> {
       try {
         const newUser = await Users.create(user);
         await console.log(`
@@ -30,9 +30,12 @@ Added User ${user.name}
         console.log(e);
       }
     },
-    async removeUser(obj: {}, { email }: { email: string }, context: {}) {
+    async removeUser(
+      _: null,
+      { email }: { email: string }
+    ): Promise<User | undefined> {
       try {
-        let deletedUser = (await Users.findOne({ email })) || {
+        const deletedUser = (await Users.findOne({ email })) || {
           _id: "user doesn't exist",
           name: "user doesn't exist",
           email: "user doesn't exist",

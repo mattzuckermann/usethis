@@ -1,33 +1,29 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es6", "dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": ["dom", "ES2020"],
+    "module": "esnext",
+    "moduleResolution": "node",
     "noEmit": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "strictNullChecks": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve"
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "target": "es5"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "assets/jss/nextjs-material-kit-pro/tooltipsStyle.js",
-    "lib/apollo.jsx",
-    "components/Header/LoggedOut.jsx",
-    "components/Header/LoggedIn.jsx",
-    "pages/index.jsx",
-    "components/Unauthenticated/index.jsx",
-    "components/Authenticated/index.jsx"
-  ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx"],
+  "rules": {
+    "@typescript-eslint/no-non-null-assertion": "off"
+  }
 }

@@ -1,21 +1,22 @@
-import { GraphQLScalarType } from "graphql";
-import { Kind } from "graphql/language";
-import Users from "./users";
+import { GraphQLScalarType } from 'graphql';
+import { Kind } from 'graphql/language';
+import Users from './users';
+import { User } from '../../@types/schema';
 
 export const usersResolvers = {
   Query: {
-    async user({ _id }: { _id: string }) {
+    async user({ _id }: { _id: string }): Promise<User> {
       const user = await Users.findOne({ _id });
       return user;
     },
-    async users() {
+    async users(): Promise<User[]> {
       const allUsers = await Users.find();
       return allUsers;
     },
   },
   Date: new GraphQLScalarType({
-    name: "Date",
-    description: "Date custom scalar",
+    name: 'Date',
+    description: 'Date custom scalar',
     parseValue(value) {
       return new Date(value); // value from the client
     },
