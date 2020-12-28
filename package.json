@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --host=0.0.0.0",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --host=0.0.0.0",
     "export": "next export",
     "deploy": "now ./out --static --no-clipboard --token=$NOW_TOKEN --public",
     "type-check": "tsc",
