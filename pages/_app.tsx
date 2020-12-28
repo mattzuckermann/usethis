@@ -6,9 +6,12 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer';
 import { Provider } from 'next-auth/client';
 import { AppProps } from 'next/app';
+import { withApollo } from '../lib/apollo';
 import 'reflect-metadata';
 
 export default function App({ Component, pageProps }: AppProps): ReactElement {
+  const WrappedComponent = withApollo(Component);
+  console.log(pageProps);
   return (
     <Provider session={pageProps.session}>
       <Head>
@@ -18,7 +21,11 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
       <section className="pageContainer">
         <main className="contentWrapper">
           <Header />
-          <Component {...pageProps} />
+          {pageProps.authenticated === false ? (
+            <Component {...pageProps} />
+          ) : (
+            <WrappedComponent {...pageProps} />
+          )}
         </main>
         <Footer />
       </section>

@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import { getSession } from 'next-auth/client';
 import { User } from 'next-auth';
 import { GetServerSidePropsContext } from 'next';
+import FormSection from '../components/Form/FormSection';
 
 const Profile = ({ user }: { user: User }): ReactElement => {
   return (
@@ -11,6 +12,7 @@ const Profile = ({ user }: { user: User }): ReactElement => {
           ? `This is your profile, ${user.name}!`
           : `This is your profile!`}
       </h1>
+      <FormSection />
     </main>
   );
 };
