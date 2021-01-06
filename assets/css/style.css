@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap');
 body {
   /* COLORS */
   --black: #121629;
@@ -23,7 +23,6 @@ body {
   /* Type */
   --headingFont: Chicago, Lora, serif;
   --bodyFont: Chicago, Ubuntu, sans-serif;
-  --baseFontSize: 112.5%;
   /* Styles */
   --line: solid 1px var(--lineColor);
   /* 18px */
@@ -47,15 +46,17 @@ body {
   --headerHeight: 3rem;
   --borderRadius: 10px;
   background-color: var(--darkBlue);
-  background-image: url("/Homepage.webp");
+  background-image: url('/Homepage.webp');
   font-family: var(--bodyFont);
   color: var(--white);
 }
 
 /* Type Scale */
 html {
+  --baseFontSize: 112.5%;
   font-size: var(--baseFontSize);
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 *,
@@ -91,6 +92,7 @@ header nav a + a {
 
 /* For loop going through varying header sizes */
 h1 {
+  position: relative;
   font-size: var(--h1);
   font-family: var(--headingFont);
   font-weight: 400;
@@ -102,6 +104,7 @@ h1 a {
 }
 
 h2 {
+  position: relative;
   font-size: var(--h2);
   font-family: var(--headingFont);
   font-weight: 400;
@@ -113,6 +116,7 @@ h2 a {
 }
 
 h3 {
+  position: relative;
   font-size: var(--h3);
   font-family: var(--headingFont);
   font-weight: 400;
@@ -124,6 +128,7 @@ h3 a {
 }
 
 h4 {
+  position: relative;
   font-size: var(--h4);
   font-family: var(--headingFont);
   font-weight: 400;
@@ -135,6 +140,7 @@ h4 a {
 }
 
 h5 {
+  position: relative;
   font-size: var(--h5);
   font-family: var(--headingFont);
   font-weight: 400;
@@ -146,6 +152,7 @@ h5 a {
 }
 
 h6 {
+  position: relative;
   font-size: var(--h6);
   font-family: var(--headingFont);
   font-weight: 400;
@@ -166,7 +173,7 @@ li {
   list-style-type: none;
 }
 
-input[type=radio] {
+input[type='radio'] {
   margin: 0px;
 }
 
@@ -176,19 +183,19 @@ input[type=radio] {
   align-items: center;
 }
 
-input[type=radio] {
+input[type='radio'] {
   opacity: 0;
   margin: 0 0.5rem 0 0;
   z-index: 1;
   cursor: pointer;
 }
-input[type=radio] + label {
+input[type='radio'] + label {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
-input[type=radio] + label::before {
-  content: "";
+input[type='radio'] + label::before {
+  content: '';
   display: inline-block;
   position: absolute;
   top: -2px;
@@ -198,8 +205,8 @@ input[type=radio] + label::before {
   width: 18px;
   height: 18px;
 }
-input[type=radio] + label::after {
-  content: "";
+input[type='radio'] + label::after {
+  content: '';
   position: absolute;
   display: inline-block;
   left: -20.5px;
@@ -208,13 +215,14 @@ input[type=radio] + label::after {
   width: 12px;
   height: 12px;
 }
-input[type=radio] + label > p {
+input[type='radio'] + label > p {
   margin: 0px;
 }
-input[type=radio]:checked + label::after {
+input[type='radio']:checked + label::after {
   background: var(--green);
 }
-input[type=radio]:focus + label::before, input[type=radio]:hover + label::before {
+input[type='radio']:focus + label::before,
+input[type='radio']:hover + label::before {
   box-shadow: 0 0px 8px var(--green);
 }
 
@@ -307,6 +315,10 @@ button.small {
   font-size: var(--smallText);
 }
 
+form img {
+  width: 30rem;
+}
+
 /* Page layout classes */
 .contentWrapper {
   padding-bottom: 3rem;
@@ -322,6 +334,21 @@ button.small {
 }
 
 /* Specialty classes */
+.absoluteJavaScriptLogo {
+  position: absolute;
+  top: -4rem;
+  right: -5rem;
+}
+.absoluteJavaScriptLogo > div > img {
+  width: 1.8em;
+  box-shadow: 0.1em 0.033em var(--javaScriptYellow);
+}
+
+.avatar {
+  width: 1.5rem;
+  border-radius: 1rem;
+}
+
 .card {
   background-color: var(--black);
   padding: 3rem;
@@ -345,13 +372,25 @@ button.small {
   justify-content: center;
 }
 
+.flexCentered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10rem;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
 .separator {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.separator::before, .separator::after {
-  content: "";
+.separator::before,
+.separator::after {
+  content: '';
   flex: 1;
   border-bottom: 1px solid var(--white);
 }
@@ -364,8 +403,8 @@ button.small {
 
 .splashContainer {
   color: var(--black);
-  text-shadow: 8px 1px var(--javaScriptYellow);
-  background-image: url("/background.png");
+  text-shadow: 0.44rem 0.05rem var(--javaScriptYellow);
+  background-image: url('/background.png');
   background-size: 100vw 150vh;
   display: flex;
   flex-direction: column;
@@ -391,6 +430,27 @@ button.small {
   --grey: #a7a9be;
 }
 
+/* media queries */
+@media screen and (max-width: 1100px) {
+  html {
+    --baseFontSize: 87.5%;
+  }
+}
+@media screen and (max-width: 850px) {
+  html {
+    --baseFontSize: 75%;
+  }
+}
+@media screen and (max-width: 600px) {
+  html {
+    --baseFontSize: 40%;
+  }
+}
+@media screen and (max-width: 400px) {
+  html {
+    --baseFontSize: 30%;
+  }
+}
 /*# sourceMappingURL=style.css.map */
 
 /*# sourceMappingURL=style.css.map */

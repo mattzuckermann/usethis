@@ -27,9 +27,9 @@ const TakeATest = ({ user }: { user: User }): ReactElement => {
       <h1>{user?.name ? `Let's test, ${user.name}!` : `Let's test!`}</h1>
       <hr />
       {loading ? (
-        <section>LOADING...</section>
+        <section className="flex-centered card">LOADING...</section>
       ) : error ? (
-        <section>Error</section>
+        <section className="flex-centered card">Error</section>
       ) : (
         <section>
           {data.problems.map(
@@ -41,22 +41,11 @@ const TakeATest = ({ user }: { user: User }): ReactElement => {
               },
               problemNumber: number
             ) => (
-              <div
-                key={problemNumber}
-                style={{
-                  margin: '12rem',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }}
-              >
+              <div key={problemNumber} className="card flexCentered">
                 <form>
-                  <h4>Problem #{problemNumber + 1}</h4>
+                  <h3>Problem #{problemNumber + 1}</h3>
                   <p>{problem.question}</p>
-                  <img
-                    alt={`question-${problemNumber}`}
-                    width="500"
-                    src={problem.image}
-                  />
+                  <img alt={`question-${problemNumber}`} src={problem.image} />
                   <ul>
                     {problem.choices.map(
                       (choice: { answer: string }, choiceNumber: number) => (

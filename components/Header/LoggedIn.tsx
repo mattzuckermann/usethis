@@ -21,16 +21,14 @@ const LoggedIn = ({ user }: { user: User }): ReactElement => {
         <Link href="/profile">
           <a>
             <img
+              className="avatar"
               src={user.image === null ? '/profileIcon.png' : user.image}
-              style={{ width: '1.5rem', borderRadius: '1rem' }}
               alt="profile_avatar"
             />
           </a>
         </Link>
         <a>
-          <button className="cancel" onClick={() => signOut()}>
-            Logout
-          </button>
+          <button onClick={() => signOut()}>Logout</button>
         </a>
       </nav>
     </header>

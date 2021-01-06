@@ -7,7 +7,9 @@ const FormSection = (): ReactElement => {
   return (
     <section className="container layout">
       <div className="card">
+        <h2>Results</h2>
         <ResultForm />
+        <br />
         <ResultList />
       </div>
       <AbsoluteBlock />

@@ -24,7 +24,6 @@ body {
   /* Type */
   --headingFont: Chicago, Lora, serif;
   --bodyFont: Chicago, Ubuntu, sans-serif;
-  --baseFontSize: 112.5%;
   /* Styles */
   --line: solid 1px var(--lineColor);
   /* 18px */
@@ -56,8 +55,10 @@ body {
 
 /* Type Scale */
 html {
+  --baseFontSize: 112.5%;
   font-size: var(--baseFontSize);
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 *,
@@ -95,6 +96,7 @@ header {
 /* For loop going through varying header sizes */
 @for $i from 1 through 6 {
   h#{$i} {
+    position: relative;
     font-size: var(--h#{$i});
     font-family: var(--headingFont);
     font-weight: 400;
@@ -266,6 +268,10 @@ button.small {
   font-size: var(--smallText);
 }
 
+form img {
+  width: 30rem;
+}
+
 /* Page layout classes */
 .contentWrapper {
   padding-bottom: 3rem;
@@ -279,6 +285,20 @@ button.small {
 }
 
 /* Specialty classes */
+.absoluteJavaScriptLogo {
+  position: absolute;
+  top: -4rem;
+  right: -5rem;
+  > div > img {
+    // width: 98.8848px;
+    width: 1.8em;
+    box-shadow: 0.1em 0.033em var(--javaScriptYellow);
+  }
+}
+.avatar {
+  width: 1.5rem;
+  border-radius: 1rem;
+}
 .card {
   background-color: var(--black);
   padding: 3rem;
@@ -299,6 +319,15 @@ button.small {
   flex-direction: column;
   justify-content: center;
 }
+.flexCentered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10rem;
+}
+.fullWidth {
+  width: 100%;
+}
 .separator {
   display: flex;
   align-items: center;
@@ -318,7 +347,7 @@ button.small {
 }
 .splashContainer {
   color: var(--black);
-  text-shadow: 8px 1px var(--javaScriptYellow);
+  text-shadow: 0.44rem 0.05rem var(--javaScriptYellow);
   background-image: url('/background.png');
   background-size: 100vw 150vh;
   display: flex;
@@ -342,6 +371,28 @@ button.small {
   --blue: #3da9fc;
   --darkBlue: #7f5af0;
   --grey: #a7a9be;
+}
+
+/* media queries */
+@media screen and (max-width: 1100px) {
+  html {
+    --baseFontSize: 87.5%;
+  }
+}
+@media screen and (max-width: 850px) {
+  html {
+    --baseFontSize: 75%;
+  }
+}
+@media screen and (max-width: 600px) {
+  html {
+    --baseFontSize: 40%;
+  }
+}
+@media screen and (max-width: 400px) {
+  html {
+    --baseFontSize: 30%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

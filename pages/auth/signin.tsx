@@ -25,14 +25,11 @@ export default function SignIn({
       {Object.values(providers).map((provider) => (
         <div key={provider.name}>
           {provider.name !== 'Email' ? (
-            <button
-              style={{ width: '100%' }}
-              onClick={() => signIn(provider.id)}
-            >
+            <button className="fullWidth" onClick={() => signIn(provider.id)}>
               Sign in with {provider.name}
             </button>
           ) : (
-            <div style={{ margin: 0 }}>
+            <div>
               <div className="separator">or</div>
               <form>
                 <label>
@@ -47,7 +44,7 @@ export default function SignIn({
                 </label>
                 <button
                   type="submit"
-                  style={{ width: '100%' }}
+                  className="fullWidth"
                   onClick={(e) => {
                     e.preventDefault();
                     signIn('email', { email });
