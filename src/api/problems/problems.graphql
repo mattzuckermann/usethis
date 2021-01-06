@@ -1,0 +1,36 @@
+type Choice {
+  answer: String!
+  isCorrect: Boolean!
+}
+
+type Problem {
+  _id: ID!
+  question: String!
+  questionType: String!
+  choices: [Choice]!
+  correctAnswers: Int!
+  image: String!
+}
+
+input InputChoice {
+  answer: String!
+  isCorrect: Boolean!
+}
+
+input ProblemInput {
+  _id: ID
+  question: String!
+  questionType: String!
+  choices: [InputChoice]!
+  correctAnswers: Int!
+  image: String!
+}
+
+type Mutation {
+  addProblem(problem: ProblemInput): Problem
+  removeProblem(_id: ID): Problem
+}
+
+type Query {
+  problems: [Problem]
+}
