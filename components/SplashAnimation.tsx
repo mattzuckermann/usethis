@@ -14,8 +14,12 @@ const SplashAnimation = (): ReactElement => {
 
   const translateRef = useRef(null);
   const translate = useSpring({
-    from: { opacity: 0 },
+    from: {
+      opacity: 0,
+      transform: 'rotate(360deg)',
+    },
     opacity: 1,
+    transform: 'rotate(0deg)',
     config: config.gentle,
     ref: translateRef,
   });
@@ -24,8 +28,8 @@ const SplashAnimation = (): ReactElement => {
   const slide = useSpring({
     from: { opacity: 0, transform: 'translateY(-100%)' },
     opacity: 1,
-    transform: 'translateY(0%)',
-    config: config.gentle,
+    transform: 'translateY(-40%)',
+    config: config.slow,
     ref: slideRef,
   });
 
@@ -37,7 +41,7 @@ const SplashAnimation = (): ReactElement => {
           { current: slideRef.current },
         ]
       : [],
-    [0.2, 0.9, 1.2]
+    [0.2, 0.6, 0.8]
   );
 
   useEffect(() => {
@@ -47,27 +51,19 @@ const SplashAnimation = (): ReactElement => {
   return (
     <main className="splashContainer">
       <animated.div style={fade}>
-        <h1 style={{ position: 'relative' }}>
+        <h1>
           <code>&lt;useThis/&gt;</code>
-          <animated.div style={translate}>
-            <img
-              alt="JavaScript-logo"
-              style={{
-                position: 'absolute',
-                boxShadow: '6px 2px var(--javaScriptYellow)',
-                top: '-70px',
-                right: '-80px',
-                width: '2em',
-              }}
-              src="/black-js-logo.png"
-            />
-          </animated.div>
+          <div className="absoluteJavaScriptLogo">
+            <animated.div style={translate}>
+              <img alt="JavaScript-logo" src="/black-js-logo.png" />
+            </animated.div>
+          </div>
         </h1>
       </animated.div>
       <animated.div style={slide}>
-        <code style={{ fontSize: '2rem' }}>
-          mastering JavaScript&#39;s &#39;this&#39; keyword
-        </code>
+        <h2>
+          <code>mastering JavaScript&#39;s &#39;this&#39; keyword</code>
+        </h2>
       </animated.div>
     </main>
   );
