@@ -3,10 +3,17 @@ type Choice {
   isCorrect: Boolean!
 }
 
+enum QuestionType {
+  MULTICHOICE
+  MULTIANSWER
+  TRUEFALSE
+  FILLBLANK
+}
+
 type Problem {
   _id: ID!
   question: String!
-  questionType: String!
+  questionType: QuestionType!
   choices: [Choice]!
   correctAnswers: Int!
   image: String!
@@ -21,7 +28,7 @@ input InputChoice {
 input ProblemInput {
   _id: ID
   question: String!
-  questionType: String!
+  questionType: QuestionType!
   choices: [InputChoice]!
   correctAnswers: Int!
   image: String!

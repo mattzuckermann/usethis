@@ -7,6 +7,7 @@ export const ProblemsSchema = new Schema({
   },
   questionType: {
     type: String,
+    enum: ['MULTICHOICE', 'MULTIANSWER', 'TRUEFALSE', 'FILLBLANK'],
     required: true,
   },
   choices: {
@@ -17,7 +18,7 @@ export const ProblemsSchema = new Schema({
       },
     ],
     validate: {
-      validator: checkArrayLength,
+      validator: checkChoicesArrayLength,
       message:
         'Choices string array is not the proper length for this type of problem.',
     },
@@ -42,19 +43,20 @@ export const ProblemsSchema = new Schema({
   },
 });
 
-function checkArrayLength(this: Problem, value: string[]) {
+function checkChoicesArrayLength(this: Problem, value: string[]) {
   let result: boolean;
+  console.log('this.questionType', this.questionType);
   switch (this.questionType) {
-    case 'True/False':
-      return value.length === 2;
+    case 'TRUEFALSE':
+      result = value.length === 2;
       break;
-    case 'Multiple-Choice':
-    case 'Multiple-Answer':
-    case 'Fill-in-the-blank':
+    case 'MULTICHOICE':
+    case 'MULTIANSWER':
+    case 'FILLBLANK':
       result = value.length > 2;
       break;
     default:
-      result = true;
+      result = false;
   }
   return result;
 }
@@ -64,21 +66,22 @@ function checkCorrectChoices(this: Problem, value: number) {
   let result = true;
   for (let i = 0; i < this.choices.length; i++) {
     if (this.choices[i].isCorrect === true) {
-      totalCorrectAnswers = totalCorrectAnswers++;
+      totalCorrectAnswers = totalCorrectAnswers + 1;
     }
   }
   switch (this.questionType) {
-    case 'True/False':
-    case 'Multiple-Choice':
+    case 'TRUEFALSE':
+    case 'MULTICHOICE':
       result = totalCorrectAnswers === 1 && totalCorrectAnswers === value;
       break;
-    case 'Fill-in-the-blank':
-    case 'Multiple-Answer':
+    case 'FILLBLANK':
+    case 'MULTIANSWER':
       result = totalCorrectAnswers === value;
       break;
     default:
-      return result;
+      result = false;
   }
+  return result;
 }
 
 export default mongoose.models.problems ||
