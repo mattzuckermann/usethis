@@ -5,7 +5,7 @@ import AbsoluteBlock from '../AbsoluteBlock';
 
 const FormSection = (): ReactElement => {
   return (
-    <section className="container">
+    <section className="container layout">
       <div className="card">
         <ResultForm />
         <ResultList />

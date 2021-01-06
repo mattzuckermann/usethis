@@ -11,7 +11,6 @@ import 'reflect-metadata';
 
 export default function App({ Component, pageProps }: AppProps): ReactElement {
   const WrappedComponent = withApollo(Component);
-  console.log(pageProps);
   return (
     <Provider session={pageProps.session}>
       <Head>

@@ -5,8 +5,8 @@ import { GetServerSidePropsContext } from 'next';
 
 const KitchenSink = (): ReactElement => {
   return (
-    <div className="layout">
-      <main>
+    <div>
+      <main className="layout">
         <h1>Hello World</h1>
         <h2>Hello World</h2>
         <h3>Hello World</h3>

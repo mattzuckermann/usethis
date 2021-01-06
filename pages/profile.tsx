@@ -6,8 +6,8 @@ import FormSection from '../components/Form/FormSection';
 
 const Profile = ({ user }: { user: User }): ReactElement => {
   return (
-    <main className="layout">
-      <h1>
+    <main>
+      <h1 className="layout">
         {user?.name
           ? `This is your profile, ${user.name}!`
           : `This is your profile!`}
