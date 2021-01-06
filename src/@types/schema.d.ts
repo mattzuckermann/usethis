@@ -13,14 +13,6 @@ export type Result = {
   score: number;
 };
 
-/* Problems Schema */
-enum QuestionType {
-  MULTIPLECHOICE = 'MULTIPLECHOICE',
-  MULTIPLEANSWER = 'MULTIPLEANSWER',
-  FILLINTHEBLANK = 'FILLINTHEBLANK',
-  TRUEFALSE = 'TRUEFALSE',
-}
-
 type Choice = {
   answer: string;
   isCorrect: boolean;
@@ -29,7 +21,6 @@ type Choice = {
 export type ProblemInput = {
   question: string;
   questionType: string;
-  // questionType: [QuestionType];
   choices: [Choice];
   correctAnswers: number;
   image: string;
@@ -39,7 +30,6 @@ export type Problem = {
   _id: string;
   question: string;
   questionType: string;
-  // questionType: [QuestionType];
   choices: [Choice];
   correctAnswers: number;
   image: string;

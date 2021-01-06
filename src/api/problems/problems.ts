@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-
+import { Problem } from '../../@types/schema';
 export const ProblemsSchema = new Schema({
   question: {
     type: String,
@@ -42,11 +42,11 @@ export const ProblemsSchema = new Schema({
   },
 });
 
-function checkArrayLength(value: string[]) {
-  let result;
+function checkArrayLength(this: Problem, value: string[]) {
+  let result: boolean;
   switch (this.questionType) {
     case 'True/False':
-      result = value.length === 2;
+      return value.length === 2;
       break;
     case 'Multiple-Choice':
     case 'Multiple-Answer':
@@ -59,8 +59,9 @@ function checkArrayLength(value: string[]) {
   return result;
 }
 
-function checkCorrectChoices(value: number) {
+function checkCorrectChoices(this: Problem, value: number) {
   let totalCorrectAnswers = 0;
+  let result = true;
   for (let i = 0; i < this.choices.length; i++) {
     if (this.choices[i].isCorrect === true) {
       totalCorrectAnswers = totalCorrectAnswers++;
@@ -69,14 +70,14 @@ function checkCorrectChoices(value: number) {
   switch (this.questionType) {
     case 'True/False':
     case 'Multiple-Choice':
-      totalCorrectAnswers === 1 && totalCorrectAnswers === value;
+      result = totalCorrectAnswers === 1 && totalCorrectAnswers === value;
       break;
     case 'Fill-in-the-blank':
     case 'Multiple-Answer':
-      totalCorrectAnswers === value;
+      result = totalCorrectAnswers === value;
       break;
     default:
-      return true;
+      return result;
   }
 }
 

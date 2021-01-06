@@ -10,6 +10,7 @@ type Problem {
   choices: [Choice]!
   correctAnswers: Int!
   image: String!
+  quizCategory: String!
 }
 
 input InputChoice {
@@ -24,6 +25,7 @@ input ProblemInput {
   choices: [InputChoice]!
   correctAnswers: Int!
   image: String!
+  quizCategory: String!
 }
 
 type Mutation {
