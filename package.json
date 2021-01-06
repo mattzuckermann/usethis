@@ -3,18 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --host=0.0.0.0",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
-    "start": "next start --host=0.0.0.0",
+    "start": "next start -H 0.0.0.0",
     "export": "next export",
     "deploy": "now ./out --static --no-clipboard --token=$NOW_TOKEN --public",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc.json",
+    "lint": "eslint --fix . --ignore-path ./.gitignore",
     "type-check": "tsc",
     "type-watch": "tsc -w",
     "test": "jest & cypress run -q",
     "test-watch": "jest --watch & cypress run -q --no-exit",
-    "check-all": "npm run format && npm run lint && npm run type-check && npm run test",
-    "lint": "eslint --fix . --ignore-path ./.gitignore",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc.json"
+    "check-all": "npm run format && npm run lint && npm run type-check && npm run test && npm run congratulate",
+    "congratulate": "echo \"⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐\n ALL TESTS PASSED! YOU DID IT!\n⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐\""
   },
   "dependencies": {
     "@apollo/client": "^3.3.3",
