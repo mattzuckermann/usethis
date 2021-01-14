@@ -1,7 +1,7 @@
 import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language';
 import Users from './users';
-import { User } from '../../@types/schema';
+import { User } from '../../@types/users';
 
 export const usersResolvers = {
   Query: {

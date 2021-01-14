@@ -1,5 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
-import { Problem } from '../../@types/schema';
+import Quizzes from '../quizzes/quizzes';
+import { Problem } from '../../@types/problems';
+
 export const ProblemsSchema = new Schema({
   question: {
     type: String,
@@ -37,16 +39,20 @@ export const ProblemsSchema = new Schema({
     type: String,
     required: true,
   },
-  quizCategory: {
-    type: String,
-    required: true,
-  },
+});
+
+/* Cascading Removal Middleware on Quizzes Collection */
+ProblemsSchema.pre('deleteOne', async function () {
+  await Quizzes.findOneAndUpdate(
+    { problems: this._conditions._id },
+    { $pull: { problems: this._conditions._id } },
+    { new: true }
+  );
 });
 
 function checkChoicesArrayLength(this: Problem, value: string[]) {
   let result: boolean;
-  console.log('this.questionType', this.questionType);
-  switch (this.questionType) {
+  switch (this.questionType as any) {
     case 'TRUEFALSE':
       result = value.length === 2;
       break;
@@ -69,7 +75,7 @@ function checkCorrectChoices(this: Problem, value: number) {
       totalCorrectAnswers = totalCorrectAnswers + 1;
     }
   }
-  switch (this.questionType) {
+  switch (this.questionType as any) {
     case 'TRUEFALSE':
     case 'MULTICHOICE':
       result = totalCorrectAnswers === 1 && totalCorrectAnswers === value;

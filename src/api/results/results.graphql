@@ -1,18 +1,39 @@
+# Type Schema
 type Result {
   _id: ID!
-  score: Int!
+  userEmail: String!
+  quizSlug: String!
+  answers: [Int!]!
+  dateCreated: Date!
+}
+type ResultGroupee {
+  _id: ID!
+  answers: [Int!]!
+  dateCreated: Date!
+}
+type ResultGroup {
+  _id: String!
+  results: [ResultGroupee]!
 }
 
+# Input Schema
 input ResultInput {
   _id: ID
-  score: Int!
+  userEmail: String!
+  quizSlug: String!
+  answers: [Int!]!
+  dateCreated: Date!
 }
 
+# Resolver Schema
 type Mutation {
   addResult(result: ResultInput): Result
   removeResult(_id: ID): Result
 }
-
 type Query {
+  result(_id: ID): Result
   results: [Result]
+  userResults(userEmail: String): [ResultGroup]
+  quizResults(quizSlug: String): [Result]
+  userQuizResults(userEmail: String, quizSlug: String): [Result]
 }

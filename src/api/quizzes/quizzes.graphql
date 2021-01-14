@@ -1,0 +1,34 @@
+# Type Schema
+type Quiz {
+  _id: ID!
+  name: String!
+  slug: String!
+  problems: [Problem!]!
+  category: String!
+  image: String!
+  dateCreated: Date
+}
+
+# Input Schema
+input CollectionReferenceInput {
+  _id: ID!
+}
+input QuizInput {
+  _id: ID
+  name: String!
+  slug: String!
+  problems: [CollectionReferenceInput!]!
+  category: String!
+  image: String!
+  dateCreated: Date
+}
+
+# Resolver Schema
+type Mutation {
+  addQuiz(quiz: QuizInput): Quiz
+  removeQuiz(slug: String): Quiz
+}
+type Query {
+  quizzes: [Quiz]
+  quiz(slug: String): Quiz
+}

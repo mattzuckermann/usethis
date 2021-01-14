@@ -1,5 +1,5 @@
 import Users from './users';
-import { User } from '../../@types/schema';
+import { User } from '../../@types/users';
 
 export const usersMutations = {
   Mutation: {
@@ -26,8 +26,8 @@ Added User ${user.name}
 ====================
 `);
         return newUser;
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
     },
     async removeUser(
@@ -50,8 +50,8 @@ Deleted User ${email}
 `);
         }
         return deletedUser;
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
     },
   },

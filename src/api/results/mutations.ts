@@ -1,5 +1,5 @@
 import Results from './results';
-import { Result } from '../../@types/schema';
+import { ResultInput, Result } from '../../@types/results';
 
 export const resultsMutations = {
   Mutation: {
@@ -8,17 +8,14 @@ export const resultsMutations = {
       {
         result,
       }: {
-        result: {
-          _id: string;
-          score: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-        };
+        result: ResultInput;
       }
     ): Promise<Result> {
       try {
         const newResult = await Results.create(result);
         return newResult;
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
     },
     async removeResult(_: null, { _id }: { _id: string }): Promise<Result> {
@@ -36,8 +33,8 @@ Deleted Result ID ${_id}
 `);
         }
         return deletedResult;
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
     },
   },

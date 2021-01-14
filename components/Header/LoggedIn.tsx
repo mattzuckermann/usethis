@@ -15,18 +15,19 @@ const LoggedIn = ({ user }: { user: User }): ReactElement => {
         <Link href="/study">
           <a>Study</a>
         </Link>
-        <Link href="/take-a-test">
-          <a>Test</a>
+        <Link href="/quizzes">
+          <a>Tests</a>
         </Link>
-        <Link href="/profile">
-          <a>
-            <img
-              className="avatar"
-              src={user.image === null ? '/profileIcon.png' : user.image}
-              alt="profile_avatar"
-            />
-          </a>
+        <Link href="/results">
+          <a>Results</a>
         </Link>
+        <a>
+          <img
+            className="avatar"
+            src={user.image === null ? '/profileIcon.png' : user.image}
+            alt="profile_avatar"
+          />
+        </a>
         <a>
           <button onClick={() => signOut()}>Logout</button>
         </a>
