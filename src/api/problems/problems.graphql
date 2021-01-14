@@ -1,8 +1,3 @@
-type Choice {
-  answer: String!
-  isCorrect: Boolean!
-}
-
 enum QuestionType {
   MULTICHOICE
   MULTIANSWER
@@ -10,17 +5,21 @@ enum QuestionType {
   FILLBLANK
 }
 
+type Choice {
+  answer: String!
+  isCorrect: Boolean!
+}
+
 type Problem {
   _id: ID!
   question: String!
   questionType: QuestionType!
-  choices: [Choice]!
+  choices: [Choice!]!
   correctAnswers: Int!
   image: String!
-  quizCategory: String!
 }
 
-input InputChoice {
+input ChoiceInput {
   answer: String!
   isCorrect: Boolean!
 }
@@ -29,10 +28,9 @@ input ProblemInput {
   _id: ID
   question: String!
   questionType: QuestionType!
-  choices: [InputChoice]!
+  choices: [ChoiceInput!]!
   correctAnswers: Int!
   image: String!
-  quizCategory: String!
 }
 
 type Mutation {

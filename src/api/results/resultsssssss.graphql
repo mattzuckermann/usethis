@@ -1,0 +1,29 @@
+# Type Schema
+type Result {
+  _id: ID!
+  userEmail: String!
+  quizSlug: String!
+  answers: [Int!]!
+  dateCreated: Date!
+}
+
+# Input Schema
+input ResultInput {
+  _id: ID
+  userEmail: String!
+  quizSlug: String!
+  answers: [Int!]!
+  dateCreated: Date!
+}
+
+# Resolver Schema
+type Mutation {
+  addResult(result: ResultInput): Result
+  removeResult(_id: ID): Result
+}
+type Query {
+  results: [Result]
+  userResults(userEmail: String): [Result]
+  quizResults(quizSlug: String): [Result]
+  userQuizResults(userEmail: String, quizSlug: String): [Result]
+}

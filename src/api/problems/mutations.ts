@@ -1,5 +1,5 @@
 import Problems from './problems';
-import { ProblemInput, Problem } from '../../@types/schema';
+import { ProblemInput, Problem } from '../../@types/problems';
 
 export const problemsMutations = {
   Mutation: {
@@ -14,8 +14,8 @@ export const problemsMutations = {
       try {
         const newProblem = await Problems.create(problem);
         return newProblem;
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
     },
     async removeProblem(_: null, { _id }: { _id: string }): Promise<Problem> {
@@ -25,8 +25,8 @@ export const problemsMutations = {
           await Problems.deleteOne({ _id });
         }
         return deletedResult;
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
     },
   },

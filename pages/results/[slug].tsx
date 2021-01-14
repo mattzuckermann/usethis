@@ -2,17 +2,18 @@ import React, { ReactElement } from 'react';
 import { getSession } from 'next-auth/client';
 import { User } from 'next-auth';
 import { GetServerSidePropsContext } from 'next';
-import FormSection from '../components/Form/FormSection';
+import FormSection from '../../components/Form/FormSection';
 
 const Profile = ({ user }: { user: User }): ReactElement => {
   return (
-    <main>
-      <h1 className="layout">
+    <main className="layout">
+      <h1>
         {user?.name
-          ? `This is your profile, ${user.name}!`
-          : `This is your profile!`}
+          ? `These are your test results, ${user.name}!`
+          : `These are your test results!`}
       </h1>
-      <FormSection />
+      <hr />
+      <FormSection user={user} />
     </main>
   );
 };

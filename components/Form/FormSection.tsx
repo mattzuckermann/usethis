@@ -1,16 +1,14 @@
 import React, { ReactElement } from 'react';
-import ResultForm from './ResultForm';
-import ResultList from './ResultList';
+import { ResultList } from './ResultList';
+import { User } from '../../src/@types/users';
 import AbsoluteBlock from '../AbsoluteBlock';
 
-const FormSection = (): ReactElement => {
+const FormSection = ({ user }: { user: User }): ReactElement => {
   return (
-    <section className="container layout">
+    <section className="container">
       <div className="card">
         <h2>Results</h2>
-        <ResultForm />
-        <br />
-        <ResultList />
+        <ResultList user={user} />
       </div>
       <AbsoluteBlock />
     </section>

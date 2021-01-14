@@ -15,7 +15,10 @@ const connectDb = (
 const db = mongoose.connection;
 
 db.once('open', () => {
-  console.log('Connected to mongo');
+  // Make console color green
+  console.log('\x1b[33m', 'Connected to mongo ✅');
+  // Reset console color
+  console.log('\x1b[0m', '');
 });
 
 export default connectDb;

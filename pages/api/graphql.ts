@@ -1,10 +1,7 @@
 import { ApolloServer } from 'apollo-server-micro';
 import { mergeResolvers, mergeTypeDefs } from 'graphql-tools';
 import connectDb from '../../lib/mongoose';
-// Results Schema
-import results from '../../src/api/results/results.graphql';
-import { resultsResolvers } from '../../src/api/results/resolvers';
-import { resultsMutations } from '../../src/api/results/mutations';
+
 // Users Schema
 import users from '../../src/api/users/users.graphql';
 import { usersResolvers } from '../../src/api/users/resolvers';
@@ -13,18 +10,28 @@ import { usersMutations } from '../../src/api/users/mutations';
 import problems from '../../src/api/problems/problems.graphql';
 import { problemsResolvers } from '../../src/api/problems/resolvers';
 import { problemsMutations } from '../../src/api/problems/mutations';
+// Quizzes Schema
+import quizzes from '../../src/api/quizzes/quizzesssssssss.graphql';
+import { quizzesResolvers } from '../../src/api/quizzes/resolvers';
+import { quizzesMutations } from '../../src/api/quizzes/mutations';
+// Results Schema
+import results from '../../src/api/results/resultsssssss.graphql';
+import { resultsResolvers } from '../../src/api/results/resolvers';
+import { resultsMutations } from '../../src/api/results/mutations';
 
 // Merging typeDefs
-const typeDefs = mergeTypeDefs([results, users, problems]);
+const typeDefs = mergeTypeDefs([users, quizzes, problems, results]);
 
 // Merging resolvers
 const resolvers = mergeResolvers([
-  resultsResolvers,
-  resultsMutations,
   usersResolvers,
   usersMutations,
+  quizzesResolvers,
+  quizzesMutations,
   problemsResolvers,
   problemsMutations,
+  resultsResolvers,
+  resultsMutations,
 ]);
 
 // Initializing Apollo Server with GraphQL typeDefs and resolvers

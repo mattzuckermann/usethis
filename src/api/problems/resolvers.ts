@@ -1,5 +1,5 @@
 import Problems from './problems';
-import { Problem } from '../../@types/schema';
+import { Problem } from '../../@types/problems';
 
 export const problemsResolvers = {
   Query: {
