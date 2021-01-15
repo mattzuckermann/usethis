@@ -319,6 +319,10 @@ form img {
   width: 30rem;
 }
 
+a > img {
+  width: 30rem;
+}
+
 /* Page layout classes */
 .contentWrapper {
   padding-bottom: 3rem;

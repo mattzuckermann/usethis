@@ -271,6 +271,9 @@ button.small {
 form img {
   width: 30rem;
 }
+a > img {
+  width: 30rem;
+}
 
 /* Page layout classes */
 .contentWrapper {
@@ -290,7 +293,6 @@ form img {
   top: -4rem;
   right: -5rem;
   > div > img {
-    // width: 98.8848px;
     width: 1.8em;
     box-shadow: 0.1em 0.033em var(--javaScriptYellow);
   }

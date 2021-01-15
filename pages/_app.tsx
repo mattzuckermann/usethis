@@ -18,9 +18,9 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
         <link rel="icon" href="/favicon.svg" />
         <link rel="stylesheet" href="/fonts/stylesheet.css" />
       </Head>
+      <Header />
       <section className="pageContainer">
         <main className="contentWrapper">
-          <Header />
           {pageProps.authenticated === false ? (
             <Component {...pageProps} />
           ) : (
