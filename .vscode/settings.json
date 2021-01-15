@@ -1,12 +1,16 @@
 {
     "cSpell.ignoreWords": [
         "ecmascript",
+        "fillblank",
         "googleusercontent",
         "inmemory",
         "json",
+        "multianswer",
+        "multichoice",
         "oovt",
         "prettierrc",
         "signin",
+        "truefalse",
         "typeorm"
     ]
 }

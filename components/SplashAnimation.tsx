@@ -46,7 +46,7 @@ const SplashAnimation = (): ReactElement => {
 
   useEffect(() => {
     setLoaded(true);
-  });
+  }, []);
 
   return (
     <main className="splashContainer">
