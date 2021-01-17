@@ -1,5 +1,17 @@
 # Type Schema
+type CollectionReference {
+  _id: ID!
+}
 type Quiz {
+  _id: ID!
+  name: String!
+  slug: String!
+  problems: [CollectionReference!]!
+  category: String!
+  image: String!
+  dateCreated: Date
+}
+type QuizWithProblems {
   _id: ID!
   name: String!
   slug: String!
@@ -7,6 +19,16 @@ type Quiz {
   category: String!
   image: String!
   dateCreated: Date
+}
+type QuizWithResults {
+  _id: ID!
+  name: String!
+  slug: String!
+  problems: [Problem!]!
+  category: String!
+  image: String!
+  dateCreated: Date
+  results: [Result]!
 }
 
 # Input Schema
@@ -29,6 +51,7 @@ type Mutation {
   removeQuiz(slug: String): Quiz
 }
 type Query {
+  quiz(slug: String): QuizWithProblems
   quizzes: [Quiz]
-  quiz(slug: String): Quiz
+  quizzesTakenByUser(userEmail: String): [QuizWithResults]
 }

@@ -2,27 +2,60 @@ import React, { ReactElement } from 'react';
 import Link from 'next/link';
 import { getSession } from 'next-auth/client';
 import { User } from 'next-auth';
+import { Result } from '../../src/@types/results';
 import { GetServerSidePropsContext } from 'next';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
-const GET_ALL_QUIZZES = gql`
-  query getAllQuizzes {
-    quizzes {
+const GET_QUIZZES_TAKEN_BY_USER = gql`
+  query quizzesTakenByUser($userEmail: String) {
+    quizzesTakenByUser(userEmail: $userEmail) {
       _id
       name
       slug
       problems {
-        _id
+        choices {
+          answer
+          isCorrect
+        }
       }
-      image
+      results {
+        _id
+        userEmail
+        quizSlug
+        answers
+        dateCreated
+      }
     }
   }
 `;
 
 const Quizzes = ({ user }: { user: User }): ReactElement => {
-  const { data, loading, error } = useQuery(GET_ALL_QUIZZES);
+  console.log(user.email);
+  const { data, loading, error } = useQuery(GET_QUIZZES_TAKEN_BY_USER, {
+    variables: { userEmail: user.email },
+  });
 
+  const calculateQuizPercentage = (
+    userAnswers: number[],
+    quizProblems: [
+      {
+        choices: [
+          {
+            isCorrect: boolean;
+          }
+        ];
+      }
+    ]
+  ): string => {
+    let answersCorrect = 0;
+    userAnswers.forEach((userAnswer, index) => {
+      if (quizProblems && quizProblems[index].choices[userAnswer].isCorrect)
+        answersCorrect++;
+    });
+    return quizProblems && `${(answersCorrect / quizProblems.length) * 100}%`;
+  };
+  console.log(data);
   return (
     <main className="layout">
       <h1>
@@ -36,16 +69,40 @@ const Quizzes = ({ user }: { user: User }): ReactElement => {
       ) : error ? (
         <section className="flex-centered card">Error</section>
       ) : (
-        <section>
-          {data?.quizzes.map((quiz: any) => {
+        <section className="flex-centered card">
+          {data.quizzesTakenByUser.map((quiz, quizIndex: number) => {
             return (
-              <div key={quiz._id}>
-                <h3>{quiz.name}</h3>
-                <Link href={`/results/${encodeURIComponent(quiz.slug)}`}>
-                  <a>
-                    <img alt={quiz.slug} src={quiz.image} />
-                  </a>
-                </Link>
+              <div key={quizIndex}>
+                <h2>&quot;{quiz.name}&quot; Quiz Results:</h2>
+                {quiz.results.map((result: Result, index: string) => {
+                  const { _id, answers, dateCreated } = result;
+                  const quizPercentage = calculateQuizPercentage(
+                    answers,
+                    quiz.problems
+                  );
+
+                  // Time Formatting
+                  const [month, date, year] = new Date(dateCreated)
+                    .toLocaleDateString('en-US')
+                    .split('/');
+                  const [hour, minute, second] = new Date(dateCreated)
+                    .toLocaleTimeString('en-US')
+                    .split(/:| /);
+
+                  return (
+                    <div key={index}>
+                      <Link href={`/results/${_id}`}>
+                        <a>
+                          <p>
+                            {`${month}/${date}/${year} at ${hour}:${minute}:${second} - Score: ${
+                              quizPercentage ? quizPercentage : ''
+                            }`}
+                          </p>
+                        </a>
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
             );
           })}

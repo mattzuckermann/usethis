@@ -62,6 +62,7 @@ export const Quiz = ({
             },
           });
           setAnswers(nulledArray);
+          window.location.replace(`/results`);
         }}
         disabled={answers.includes(null)}
       >

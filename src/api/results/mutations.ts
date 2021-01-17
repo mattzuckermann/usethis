@@ -1,4 +1,5 @@
 import Results from './results';
+import Quizzes from '../quizzes/quizzes';
 import { ResultInput, Result } from '../../@types/results';
 
 export const resultsMutations = {
@@ -13,6 +14,12 @@ export const resultsMutations = {
     ): Promise<Result> {
       try {
         const newResult = await Results.create(result);
+        // Add result to corresponding quiz
+        await Quizzes.updateOne(
+          { slug: newResult.quizSlug },
+          { $push: { results: newResult } },
+          { new: true }
+        );
         return newResult;
       } catch (err) {
         console.log(err);

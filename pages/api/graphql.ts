@@ -11,11 +11,11 @@ import problems from '../../src/api/problems/problems.graphql';
 import { problemsResolvers } from '../../src/api/problems/resolvers';
 import { problemsMutations } from '../../src/api/problems/mutations';
 // Quizzes Schema
-import quizzes from '../../src/api/quizzes/quizzesssssssss.graphql';
+import quizzes from '../../src/api/quizzes/quizzeszzzz.graphql';
 import { quizzesResolvers } from '../../src/api/quizzes/resolvers';
 import { quizzesMutations } from '../../src/api/quizzes/mutations';
 // Results Schema
-import results from '../../src/api/results/resultsssssss.graphql';
+import results from '../../src/api/results/resultszz.graphql';
 import { resultsResolvers } from '../../src/api/results/resolvers';
 import { resultsMutations } from '../../src/api/results/mutations';
 
