@@ -4,24 +4,10 @@ import { getSession } from 'next-auth/client';
 import { User } from 'next-auth';
 import { GetServerSidePropsContext } from 'next';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-
-const GET_ALL_QUIZZES = gql`
-  query getAllQuizzes {
-    quizzes {
-      _id
-      name
-      slug
-      problems {
-        _id
-      }
-      image
-    }
-  }
-`;
+import { GET_QUIZZES } from '../../graphql/queries/quizzes';
 
 const Quizzes = ({ user }: { user: User }): ReactElement => {
-  const { data, loading, error } = useQuery(GET_ALL_QUIZZES);
+  const { data, loading, error } = useQuery(GET_QUIZZES);
 
   return (
     <main className="layout">

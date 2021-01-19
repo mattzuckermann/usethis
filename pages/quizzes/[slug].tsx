@@ -4,30 +4,12 @@ import { getSession } from 'next-auth/client';
 import { User } from 'next-auth';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import { Quiz } from '../../components/Form/Quiz';
-
-const GET_QUIZ_PROBLEMS = gql`
-  query getQuizProblems($slug: String) {
-    quiz(slug: $slug) {
-      name
-      problems {
-        choices {
-          answer
-        }
-        image
-        question
-      }
-      category
-      image
-      dateCreated
-    }
-  }
-`;
+import { GET_QUIZ } from '../../graphql/queries/quiz';
 
 const QuizSet = ({ user }: { user: User }): ReactElement => {
   const router = useRouter();
-  const { data, loading, error } = useQuery(GET_QUIZ_PROBLEMS, {
+  const { data, loading, error } = useQuery(GET_QUIZ, {
     variables: { slug: router.query.slug },
   });
   return (

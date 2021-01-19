@@ -3,12 +3,7 @@ import { Choice } from './Choice';
 
 type Dispatch<A> = (value: A) => void;
 type SetStateAction<S> = S | ((prevState: S) => S);
-export const Problem = ({
-  problem,
-  problemNumber,
-  answers,
-  setAnswers,
-}: {
+type Props = {
   problem: {
     question: string;
     image: string;
@@ -17,7 +12,13 @@ export const Problem = ({
   problemNumber: number;
   answers: [number | null];
   setAnswers: Dispatch<SetStateAction<[number | null]>>;
-}): ReactElement => {
+};
+export const Problem = ({
+  problem,
+  problemNumber,
+  answers,
+  setAnswers,
+}: Props): ReactElement => {
   return (
     <div className="card flexCentered">
       <form>

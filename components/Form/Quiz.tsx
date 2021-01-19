@@ -1,45 +1,30 @@
 import React, { ReactElement, useState } from 'react';
 import { Problem } from './Problem';
 import { useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { ADD_RESULT } from '../../graphql/mutations/addResult';
 
-type ProblemType = {
+type Problem = {
   question: string;
   image: string;
   choices: [{ answer: string }];
 };
-
-const ADD_QUIZ_RESULTS = gql`
-  mutation addResult($result: ResultInput) {
-    addResult(result: $result) {
-      _id
-      userEmail
-      quizSlug
-      answers
-      dateCreated
-    }
-  }
-`;
-
-export const Quiz = ({
-  user,
-  problems,
-  slug,
-}: {
+type Props = {
   user: {
     name: string;
     email: string;
     image: string;
   };
-  problems: [ProblemType];
+  problems: [Problem];
   slug: string;
-}): ReactElement => {
+};
+
+export const Quiz = ({ user, problems, slug }: Props): ReactElement => {
   const nulledArray = new Array(problems.length).fill(null);
   const [answers, setAnswers] = useState<[number]>(nulledArray);
-  const [addResult] = useMutation(ADD_QUIZ_RESULTS);
+  const [addResult] = useMutation(ADD_RESULT);
   return (
     <section>
-      {problems.map((problem: ProblemType, problemNumber: number) => (
+      {problems.map((problem: Problem, problemNumber: number) => (
         <Problem
           key={problemNumber}
           problem={problem}

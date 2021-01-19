@@ -2,12 +2,12 @@ import React, { ReactElement } from 'react';
 
 type Dispatch<A> = (value: A) => void;
 type SetStateAction<S> = S | ((prevState: S) => S);
-type ChoiceProps = {
+type Props = {
   problemNumber: number;
   choiceNumber: number;
   choice: { answer: string };
-  answers: [number | null];
-  setAnswers: Dispatch<SetStateAction<[number | null]>>;
+  answers: number[];
+  setAnswers: Dispatch<SetStateAction<number[]>>;
 };
 
 export const Choice = ({
@@ -16,7 +16,7 @@ export const Choice = ({
   choice,
   answers,
   setAnswers,
-}: ChoiceProps): ReactElement => {
+}: Props): ReactElement => {
   const { answer } = choice;
   return (
     <li className="radio-wrapper">

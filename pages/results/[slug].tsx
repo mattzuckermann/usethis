@@ -5,20 +5,8 @@ import Link from 'next/link';
 import { GetServerSidePropsContext } from 'next';
 import AbsoluteBlock from '../../components/AbsoluteBlock';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
-
-const GET_RESULT = gql`
-  query getResult($_id: ID!) {
-    result(_id: $_id) {
-      _id
-      userEmail
-      quizSlug
-      answers
-      dateCreated
-    }
-  }
-`;
+import { GET_RESULT } from '../../graphql/queries/result';
 
 const Profile = ({ user }: { user: User }): ReactElement => {
   const router = useRouter();

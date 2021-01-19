@@ -1,61 +1,38 @@
 import React, { ReactElement } from 'react';
-import Link from 'next/link';
+import { GetServerSidePropsContext } from 'next';
 import { getSession } from 'next-auth/client';
 import { User } from 'next-auth';
-import { Result } from '../../src/@types/results';
-import { GetServerSidePropsContext } from 'next';
+import { GET_QUIZZES_TAKEN_BY_USER } from '../../graphql/queries/quizzesTakenByUser';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { ResultQuiz } from '../../components/Form/ResultQuiz';
 
-const GET_QUIZZES_TAKEN_BY_USER = gql`
-  query quizzesTakenByUser($userEmail: String) {
-    quizzesTakenByUser(userEmail: $userEmail) {
-      _id
-      name
-      slug
-      problems {
-        choices {
-          answer
-          isCorrect
-        }
+type Problems = [
+  {
+    choices: [
+      {
+        answer: string;
+        isCorrect: boolean;
       }
-      results {
-        _id
-        userEmail
-        quizSlug
-        answers
-        dateCreated
-      }
-    }
+    ];
   }
-`;
+];
+type Result = {
+  _id: string;
+  userEmail: string;
+  answers: number[];
+  dateCreated: Date;
+};
+type Quiz = {
+  name: string;
+  problems: Problems;
+  results: Result[];
+};
 
 const Quizzes = ({ user }: { user: User }): ReactElement => {
-  console.log(user.email);
   const { data, loading, error } = useQuery(GET_QUIZZES_TAKEN_BY_USER, {
     variables: { userEmail: user.email },
   });
 
-  const calculateQuizPercentage = (
-    userAnswers: number[],
-    quizProblems: [
-      {
-        choices: [
-          {
-            isCorrect: boolean;
-          }
-        ];
-      }
-    ]
-  ): string => {
-    let answersCorrect = 0;
-    userAnswers.forEach((userAnswer, index) => {
-      if (quizProblems && quizProblems[index].choices[userAnswer].isCorrect)
-        answersCorrect++;
-    });
-    return quizProblems && `${(answersCorrect / quizProblems.length) * 100}%`;
-  };
-  console.log(data);
   return (
     <main className="layout">
       <h1>
@@ -70,40 +47,10 @@ const Quizzes = ({ user }: { user: User }): ReactElement => {
         <section className="flex-centered card">Error</section>
       ) : (
         <section className="flex-centered card">
-          {data.quizzesTakenByUser.map((quiz, quizIndex: number) => {
+          {/* Map through quizzes taken by user fetched from database */}
+          {data.quizzesTakenByUser.map((quiz: Quiz, quizIndex: number) => {
             return (
-              <div key={quizIndex}>
-                <h2>&quot;{quiz.name}&quot; Quiz Results:</h2>
-                {quiz.results.map((result: Result, index: string) => {
-                  const { _id, answers, dateCreated } = result;
-                  const quizPercentage = calculateQuizPercentage(
-                    answers,
-                    quiz.problems
-                  );
-
-                  // Time Formatting
-                  const [month, date, year] = new Date(dateCreated)
-                    .toLocaleDateString('en-US')
-                    .split('/');
-                  const [hour, minute, second] = new Date(dateCreated)
-                    .toLocaleTimeString('en-US')
-                    .split(/:| /);
-
-                  return (
-                    <div key={index}>
-                      <Link href={`/results/${_id}`}>
-                        <a>
-                          <p>
-                            {`${month}/${date}/${year} at ${hour}:${minute}:${second} - Score: ${
-                              quizPercentage ? quizPercentage : ''
-                            }`}
-                          </p>
-                        </a>
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
+              <ResultQuiz key={quizIndex} quiz={quiz} quizIndex={quizIndex} />
             );
           })}
         </section>
@@ -123,7 +70,6 @@ export async function getServerSideProps(
     context.res.end();
     return {};
   }
-
   return {
     props: {
       user: session.user,
