@@ -26,6 +26,7 @@ body {
   --bodyFont: Chicago, Ubuntu, sans-serif;
   /* Styles */
   --line: solid 1px var(--lineColor);
+  --accordionBorder: 6px solid var(--blue);
   /* 18px */
   --h1: 3.052rem;
   --h2: 2.441rem;
@@ -108,14 +109,49 @@ header {
   }
 }
 
-div > a {
+h2[role='button'] {
+  background-color: var(--white);
+  color: var(--black);
+  margin: 0px;
+  padding: 10px 30px;
+  cursor: pointer;
+  border-top: var(--accordionBorder);
+  border-right: var(--accordionBorder);
+  border-left: var(--accordionBorder);
+  + ul {
+    margin: 0px;
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-left: var(--accordionBorder);
+    border-right: var(--accordionBorder);
+    + ul:last-of-type {
+      border-bottom: var(--accordionBorder);
+    }
+    li {
+      padding: 5px 0px;
+    }
+  }
+}
+
+section article:last-child {
+  border-bottom: var(--accordionBorder);
+}
+
+.openDrawer[role='button'] {
+  border-bottom: var(--accordionBorder);
+}
+
+div > a,
+li > a {
   color: white;
   text-decoration: none;
   background-image: linear-gradient(180deg, transparent 70%, var(--blue) 0);
 }
 
-li {
-  list-style-type: none;
+a.no-decoration {
+  text-decoration: none;
+  background-image: none;
 }
 
 input[type='radio'] {
@@ -276,10 +312,10 @@ a > img {
 }
 
 /* Page layout classes */
-.contentWrapper {
+.content-wrapper {
   padding-bottom: 3rem;
 }
-.pageContainer {
+.page-container {
   position: relative;
   min-height: 100vh;
 }
@@ -288,7 +324,7 @@ a > img {
 }
 
 /* Specialty classes */
-.absoluteJavaScriptLogo {
+.absolute-javaScript-logo {
   position: absolute;
   top: -4rem;
   right: -5rem;
@@ -321,11 +357,18 @@ a > img {
   flex-direction: column;
   justify-content: center;
 }
-.flexCentered {
+.flex-left {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 6rem;
+}
+.flex-centered {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10rem;
+  flex-direction: column;
+  margin: 6rem;
 }
 .fullWidth {
   width: 100%;
@@ -347,16 +390,17 @@ a > img {
     margin-left: 1rem;
   }
 }
-.splashContainer {
+.splash-container {
   color: var(--black);
   text-shadow: 0.44rem 0.05rem var(--javaScriptYellow);
   background-image: url('/background.png');
-  background-size: 100vw 150vh;
+  background-size: 100vw 110vh;
   display: flex;
   flex-direction: column;
+  top: 40vw;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
 }
 .text-shortened {
   width: 79%;

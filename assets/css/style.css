@@ -164,10 +164,6 @@ h6 a {
   text-decoration: none;
 }
 
-html {
-  --accordionBorder: 6px solid var(--blue);
-}
-
 h2[role=button] {
   background-color: var(--white);
   color: var(--black);

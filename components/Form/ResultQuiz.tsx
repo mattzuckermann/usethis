@@ -1,7 +1,7 @@
 import React, { useState, ReactElement } from 'react';
 import { ResultScore } from '../../components/Form/ResultScore';
 import { AnimatePresence, motion } from 'framer-motion';
-
+import classNames from 'classnames';
 type Problems = [
   {
     choices: [
@@ -32,11 +32,12 @@ export const ResultQuiz = ({ quiz, quizIndex }: Props): ReactElement => {
   const [isToggled, setIsToggled] = useState(false);
   quizIndex = quizIndex + 1;
   return (
-    <div>
+    <article>
       <h2
         role="button"
         tabIndex={0}
         aria-expanded={isToggled}
+        className={classNames({ openDrawer: isToggled })}
         onClick={() => setIsToggled(!isToggled)}
         onKeyPress={(e) => {
           e.preventDefault();
@@ -44,12 +45,13 @@ export const ResultQuiz = ({ quiz, quizIndex }: Props): ReactElement => {
         }}
         aria-controls={`quiz-${quizIndex}`}
       >
-        &quot;{quiz.name}&quot; Quiz Results:
+        {quiz.name}
       </h2>
+
       {/* Map through user's results of the currently mapped quiz */}
       <AnimatePresence>
         {isToggled && (
-          <motion.div
+          <motion.ul
             id={`quiz-${quizIndex}`}
             initial={{ opacity: 0, height: 0 }}
             animate={{
@@ -68,9 +70,9 @@ export const ResultQuiz = ({ quiz, quizIndex }: Props): ReactElement => {
                 />
               );
             })}
-          </motion.div>
+          </motion.ul>
         )}
       </AnimatePresence>
-    </div>
+    </article>
   );
 };
