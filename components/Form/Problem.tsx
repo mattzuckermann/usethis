@@ -20,7 +20,7 @@ export const Problem = ({
   setAnswers,
 }: Props): ReactElement => {
   return (
-    <div className="card flexCentered">
+    <div className="card flex-centered">
       <form>
         <h3>Problem #{problemNumber + 1}</h3>
         <p>{problem.question}</p>

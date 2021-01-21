@@ -49,11 +49,11 @@ const SplashAnimation = (): ReactElement => {
   }, []);
 
   return (
-    <main className="splashContainer">
+    <main className="splash-container">
       <animated.div style={fade}>
         <h1>
           <code>&lt;useThis/&gt;</code>
-          <div className="absoluteJavaScriptLogo">
+          <div className="absolute-javaScript-logo">
             <animated.div style={translate}>
               <img alt="JavaScript-logo" src="/black-js-logo.png" />
             </animated.div>

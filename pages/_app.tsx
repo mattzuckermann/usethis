@@ -19,8 +19,8 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
         <link rel="stylesheet" href="/fonts/stylesheet.css" />
       </Head>
       <Header />
-      <section className="pageContainer">
-        <main className="contentWrapper">
+      <section className="page-container">
+        <main className="content-wrapper">
           {pageProps.authenticated === false ? (
             <Component {...pageProps} />
           ) : (

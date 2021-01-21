@@ -11,11 +11,7 @@ const Quizzes = ({ user }: { user: User }): ReactElement => {
 
   return (
     <main className="layout">
-      <h1>
-        {user?.name
-          ? `Let's choose a quiz, ${user.name}!`
-          : `Let's choose a quiz!`}
-      </h1>
+      <h1>Quizzes:</h1>
       <hr />
       {loading ? (
         <section className="flex-centered card">LOADING...</section>
@@ -25,10 +21,10 @@ const Quizzes = ({ user }: { user: User }): ReactElement => {
         <section>
           {data?.quizzes.map((quiz: any) => {
             return (
-              <div key={quiz._id}>
+              <div className="flex-centered card" key={quiz._id}>
                 <h3>{quiz.name}</h3>
                 <Link href={`/quizzes/${encodeURIComponent(quiz.slug)}`}>
-                  <a>
+                  <a className="no-decoration">
                     <img alt={quiz.slug} src={quiz.image} />
                   </a>
                 </Link>

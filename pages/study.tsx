@@ -3,39 +3,46 @@ import { getSession } from 'next-auth/client';
 import { User } from 'next-auth';
 import { GetServerSidePropsContext } from 'next';
 
+const studyLinks = [
+  {
+    name: 'w3schools',
+    link: 'https://www.w3schools.com/js/js_this.asp',
+    image:
+      'https://imstartpage.com/wp-content/uploads/2015/01/W3Schools-logo.png',
+  },
+  {
+    name: 'javascripttutorial',
+    link: 'https://www.javascripttutorial.net/javascript-this/',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png',
+  },
+];
+
 const Study = ({ user }: { user: User }): ReactElement => {
   return (
     <main className="layout">
-      <h1>{user?.name ? `Let's study, ${user.name}!` : `Let's study!`}</h1>
+      <h1>Study Materials:</h1>
+      <hr />
       <section>
-        <div className="flexCentered card">
-          <h2>w3schools</h2>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.w3schools.com/js/js_this.asp"
-          >
-            <img
-              width="300"
-              alt="w3schools-logo"
-              src="https://imstartpage.com/wp-content/uploads/2015/01/W3Schools-logo.png"
-            />
-          </a>
-        </div>
-        <div className="flexCentered card">
-          <h2>jstutorial</h2>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.javascripttutorial.net/javascript-this/"
-          >
-            <img
-              width="300"
-              alt="javascript-logo"
-              src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
-            />
-          </a>
-        </div>
+        {studyLinks.map((studyLink, index) => {
+          return (
+            <div key={index} className="flex-centered card">
+              <h2>{studyLink.name}</h2>
+              <a
+                target="_blank"
+                className="no-decoration"
+                rel="noopener noreferrer"
+                href={studyLink.link}
+              >
+                <img
+                  width="300"
+                  alt={`${studyLink.name}-logo`}
+                  src={studyLink.image}
+                />
+              </a>
+            </div>
+          );
+        })}
       </section>
     </main>
   );

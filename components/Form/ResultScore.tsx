@@ -44,14 +44,14 @@ export const ResultScore = ({ result, problems }: Props): ReactElement => {
   // Calculating each of the user's results by percentage
   const quizPercentage = calculateQuizPercentage(answers, problems);
   return (
-    <div>
-      <Link href={`/results/${_id}`}>
+    <li>
+      <Link href={`/results/${encodeURIComponent(_id)}`}>
         <a>
           {`${month}/${date}/${year} at ${hour}:${minute}:${second} - Score: ${
             quizPercentage ? quizPercentage : ''
           }`}
         </a>
       </Link>
-    </div>
+    </li>
   );
 };

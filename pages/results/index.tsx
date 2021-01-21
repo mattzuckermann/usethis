@@ -35,24 +35,24 @@ const Quizzes = ({ user }: { user: User }): ReactElement => {
 
   return (
     <main className="layout">
-      <h1>
-        {user?.name
-          ? `These are your test results, ${user.name}!`
-          : `These are your test results!`}
-      </h1>
+      <h1>Test Results:</h1>
       <hr />
       {loading ? (
-        <section className="flex-centered card">LOADING...</section>
+        <section>LOADING...</section>
       ) : error ? (
-        <section className="flex-centered card">Error</section>
+        <section>Error</section>
       ) : (
-        <section className="flex-centered card">
+        <section className="flex-left card">
           {/* Map through quizzes taken by user fetched from database */}
-          {data.quizzesTakenByUser.map((quiz: Quiz, quizIndex: number) => {
-            return (
-              <ResultQuiz key={quizIndex} quiz={quiz} quizIndex={quizIndex} />
-            );
-          })}
+          {data.quizzesTakenByUser.length > 0 ? (
+            data.quizzesTakenByUser.map((quiz: Quiz, quizIndex: number) => {
+              return (
+                <ResultQuiz key={quizIndex} quiz={quiz} quizIndex={quizIndex} />
+              );
+            })
+          ) : (
+            <h2 className="flex-left">No Results to Show</h2>
+          )}
         </section>
       )}
     </main>
