@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { Result } from '../../@types/results';
 import Results from './results';
+import { Result } from '../../@types/results';
 
 export const resultsResolvers = {
   Query: {

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap");
 body {
   /* COLORS */
   --black: #121629;
@@ -46,7 +46,7 @@ body {
   --headerHeight: 3rem;
   --borderRadius: 10px;
   background-color: var(--darkBlue);
-  background-image: url('/Homepage.webp');
+  background-image: url("/Homepage.webp");
   font-family: var(--bodyFont);
   color: var(--white);
 }
@@ -173,7 +173,7 @@ li {
   list-style-type: none;
 }
 
-input[type='radio'] {
+input[type=radio] {
   margin: 0px;
 }
 
@@ -183,19 +183,19 @@ input[type='radio'] {
   align-items: center;
 }
 
-input[type='radio'] {
+input[type=radio] {
   opacity: 0;
   margin: 0 0.5rem 0 0;
   z-index: 1;
   cursor: pointer;
 }
-input[type='radio'] + label {
+input[type=radio] + label {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
-input[type='radio'] + label::before {
-  content: '';
+input[type=radio] + label::before {
+  content: "";
   display: inline-block;
   position: absolute;
   top: -2px;
@@ -205,8 +205,8 @@ input[type='radio'] + label::before {
   width: 18px;
   height: 18px;
 }
-input[type='radio'] + label::after {
-  content: '';
+input[type=radio] + label::after {
+  content: "";
   position: absolute;
   display: inline-block;
   left: -20.5px;
@@ -215,14 +215,13 @@ input[type='radio'] + label::after {
   width: 12px;
   height: 12px;
 }
-input[type='radio'] + label > p {
+input[type=radio] + label > p {
   margin: 0px;
 }
-input[type='radio']:checked + label::after {
+input[type=radio]:checked + label::after {
   background: var(--green);
 }
-input[type='radio']:focus + label::before,
-input[type='radio']:hover + label::before {
+input[type=radio]:focus + label::before, input[type=radio]:hover + label::before {
   box-shadow: 0 0px 8px var(--green);
 }
 
@@ -388,9 +387,8 @@ form img {
   align-items: center;
   justify-content: center;
 }
-.separator::before,
-.separator::after {
-  content: '';
+.separator::before, .separator::after {
+  content: "";
   flex: 1;
   border-bottom: 1px solid var(--white);
 }
@@ -404,7 +402,7 @@ form img {
 .splashContainer {
   color: var(--black);
   text-shadow: 0.44rem 0.05rem var(--javaScriptYellow);
-  background-image: url('/background.png');
+  background-image: url("/background.png");
   background-size: 100vw 150vh;
   display: flex;
   flex-direction: column;

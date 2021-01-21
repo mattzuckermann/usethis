@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getSession } from 'next-auth/client';
 import { User } from 'next-auth';
 import { Result } from '../../src/@types/results';
+
 import { GetServerSidePropsContext } from 'next';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
