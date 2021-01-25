@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { Problem } from './Problem';
+import { User } from 'next-auth';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_RESULT } from '../../graphql/mutations/addResult';
 
@@ -9,18 +10,14 @@ type Problem = {
   choices: [{ answer: string }];
 };
 type Props = {
-  user: {
-    name: string;
-    email: string;
-    image: string;
-  };
+  user: User;
   problems: [Problem];
-  slug: string;
+  slug: string | string[];
 };
 
 export const Quiz = ({ user, problems, slug }: Props): ReactElement => {
-  const nulledArray = new Array(problems.length).fill(null);
-  const [answers, setAnswers] = useState<[number]>(nulledArray);
+  const nulledArray = new Array<number | null>(problems.length).fill(null);
+  const [answers, setAnswers] = useState<number[]>(nulledArray);
   const [addResult] = useMutation(ADD_RESULT);
   return (
     <section>
@@ -34,9 +31,9 @@ export const Quiz = ({ user, problems, slug }: Props): ReactElement => {
         />
       ))}
       <button
-        onClick={(e) => {
+        onClick={async (e) => {
           e.preventDefault();
-          addResult({
+          await addResult({
             variables: {
               result: {
                 userEmail: user.email,
@@ -46,7 +43,6 @@ export const Quiz = ({ user, problems, slug }: Props): ReactElement => {
               },
             },
           });
-          setAnswers(nulledArray);
           window.location.replace(`/results`);
         }}
         disabled={answers.includes(null)}

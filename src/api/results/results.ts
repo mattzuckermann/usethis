@@ -12,7 +12,8 @@ export const ResultsSchema = new Schema({
 });
 
 /* Cascading Removal Middleware on Quizzes Collection */
-ResultsSchema.pre('deleteOne', async function () {
+ResultsSchema.pre('deleteOne', async function (this: any) {
+  // @ts-ignore
   await Quizzes.findOneAndUpdate(
     { results: this._conditions._id },
     { $pull: { results: this._conditions._id } },

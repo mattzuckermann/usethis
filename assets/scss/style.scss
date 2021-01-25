@@ -146,7 +146,7 @@ div > a,
 li > a {
   color: white;
   text-decoration: none;
-  background-image: linear-gradient(180deg, transparent 70%, var(--blue) 0);
+  background-image: linear-gradient(180deg, transparent 75%, var(--blue) 0);
 }
 
 a.no-decoration {
@@ -156,6 +156,11 @@ a.no-decoration {
 
 input[type='radio'] {
   margin: 0px;
+}
+
+input[type='email'],
+input[type='password'] {
+  width: 100%;
 }
 
 .radio-wrapper {
@@ -370,13 +375,14 @@ a > img {
   flex-direction: column;
   margin: 6rem;
 }
-.fullWidth {
+.full-width {
   width: 100%;
 }
 .separator {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 5px 0px;
   &::before,
   &::after {
     content: '';
@@ -402,9 +408,9 @@ a > img {
   align-items: center;
   height: 70vh;
 }
-.text-shortened {
-  width: 79%;
-  margin: 10px 0px 0px 10px;
+
+.inputField > * {
+  margin: 10px 5px;
 }
 
 /* Dark theme */

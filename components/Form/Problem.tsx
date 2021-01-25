@@ -10,8 +10,8 @@ type Props = {
     choices: [{ answer: string }];
   };
   problemNumber: number;
-  answers: [number | null];
-  setAnswers: Dispatch<SetStateAction<[number | null]>>;
+  answers: number[];
+  setAnswers: Dispatch<SetStateAction<number[]>>;
 };
 export const Problem = ({
   problem,

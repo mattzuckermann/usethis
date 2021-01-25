@@ -1,5 +1,15 @@
 import Users from './users';
 import { User } from '../../@types/users';
+import bcrypt from 'bcrypt';
+
+type UserInput = {
+  name: string;
+  email: string;
+  password: string;
+  image: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 export const usersMutations = {
   Mutation: {
@@ -8,24 +18,27 @@ export const usersMutations = {
       {
         user,
       }: {
-        user: {
-          _id: string;
-          name: string;
-          email: string;
-          image: string;
-          createdAt: Date;
-          updatedAt: Date;
-        };
+        user: UserInput;
       }
-    ): Promise<User | undefined> {
+    ): Promise<void> {
       try {
-        const newUser = await Users.create(user);
-        await console.log(`
-====================
-Added User ${user.name}
-====================
-`);
-        return newUser;
+        const saltRounds = 10;
+        const myPlaintextPassword = user.password;
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+          if (err) {
+            console.log(err);
+          } else {
+            bcrypt.hash(myPlaintextPassword, salt, async (err, hash) => {
+              if (err) {
+                console.error(err);
+              } else {
+                user.password = hash;
+                // @ts-ignore
+                await Users.create(user);
+              }
+            });
+          }
+        });
       } catch (err) {
         console.log(err);
       }

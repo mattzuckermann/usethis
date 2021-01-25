@@ -1,19 +1,18 @@
 import mongoose, { Schema } from 'mongoose';
 
 export const UsersSchema = new Schema({
-  _id: Schema.Types.ObjectId,
   name: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
-    required: true,
     unique: true,
+  },
+  password: {
+    type: String,
   },
   image: {
     type: String,
-    required: true,
   },
   createdAt: {
     type: Date,

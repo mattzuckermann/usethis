@@ -42,7 +42,8 @@ export const ProblemsSchema = new Schema({
 });
 
 /* Cascading Removal Middleware on Quizzes Collection */
-ProblemsSchema.pre('deleteOne', async function () {
+ProblemsSchema.pre('deleteOne', async function (this: any) {
+  // @ts-ignore
   await Quizzes.findOneAndUpdate(
     { problems: this._conditions._id },
     { $pull: { problems: this._conditions._id } },

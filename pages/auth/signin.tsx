@@ -1,7 +1,9 @@
 import React, { useState, useEffect, ReactElement } from 'react';
+import Link from 'next/link';
 import { providers, signIn } from 'next-auth/client';
 import { useSpring, animated, config } from 'react-spring';
 import { Provider } from '../../@types/session';
+import { Input } from '../../components/Form/Input';
 
 export default function SignIn({
   providers,
@@ -10,6 +12,7 @@ export default function SignIn({
 }): ReactElement {
   const [toggle, setToggle] = useState(false);
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   useEffect(() => {
     setToggle(true);
   });
@@ -24,35 +27,43 @@ export default function SignIn({
       <h2>Sign In</h2>
       {Object.values(providers).map((provider) => (
         <div key={provider.name}>
-          {provider.name !== 'Email' ? (
-            <button className="fullWidth" onClick={() => signIn(provider.id)}>
+          {provider.name !== 'Credentials' ? (
+            <button className="full-width" onClick={() => signIn(provider.id)}>
               Sign in with {provider.name}
             </button>
           ) : (
             <div>
               <div className="separator">or</div>
-              <form>
-                <label>
-                  Email:
-                  <input
-                    className="text-shortened"
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    id="email"
-                    name="email"
-                  />
-                </label>
+              <form method="POST">
+                <Input
+                  name="Email"
+                  value={email}
+                  placeholder="demo@demo.com"
+                  setState={setEmail}
+                />
+                <Input
+                  name="Password"
+                  value={password}
+                  placeholder="demo"
+                  setState={setPassword}
+                />
                 <button
-                  type="submit"
-                  className="fullWidth"
-                  onClick={(e) => {
+                  className="full-width"
+                  disabled={!email || !password}
+                  onClick={async (e) => {
                     e.preventDefault();
-                    signIn('email', { email });
+                    await signIn('credentials', {
+                      email,
+                      password,
+                    });
                   }}
                 >
-                  Sign in with Email
+                  Sign in with Credentials
                 </button>
               </form>
+              <Link href="/auth/signup">
+                <a>Don&apos;t have an account? Sign up here!</a>
+              </Link>
             </div>
           )}
         </div>

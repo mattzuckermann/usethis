@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap');
 body {
   /* COLORS */
   --black: #121629;
@@ -47,7 +47,7 @@ body {
   --headerHeight: 3rem;
   --borderRadius: 10px;
   background-color: var(--darkBlue);
-  background-image: url("/Homepage.webp");
+  background-image: url('/Homepage.webp');
   font-family: var(--bodyFont);
   color: var(--white);
 }
@@ -164,7 +164,7 @@ h6 a {
   text-decoration: none;
 }
 
-h2[role=button] {
+h2[role='button'] {
   background-color: var(--white);
   color: var(--black);
   margin: 0px;
@@ -174,7 +174,7 @@ h2[role=button] {
   border-right: var(--accordionBorder);
   border-left: var(--accordionBorder);
 }
-h2[role=button] + ul {
+h2[role='button'] + ul {
   margin: 0px;
   font-size: 15px;
   padding-top: 10px;
@@ -182,10 +182,10 @@ h2[role=button] + ul {
   border-left: var(--accordionBorder);
   border-right: var(--accordionBorder);
 }
-h2[role=button] + ul + ul:last-of-type {
+h2[role='button'] + ul + ul:last-of-type {
   border-bottom: var(--accordionBorder);
 }
-h2[role=button] + ul li {
+h2[role='button'] + ul li {
   padding: 5px 0px;
 }
 
@@ -193,7 +193,7 @@ section article:last-child {
   border-bottom: var(--accordionBorder);
 }
 
-.openDrawer[role=button] {
+.openDrawer[role='button'] {
   border-bottom: var(--accordionBorder);
 }
 
@@ -201,7 +201,7 @@ div > a,
 li > a {
   color: white;
   text-decoration: none;
-  background-image: linear-gradient(180deg, transparent 70%, var(--blue) 0);
+  background-image: linear-gradient(180deg, transparent 75%, var(--blue) 0);
 }
 
 a.no-decoration {
@@ -209,8 +209,13 @@ a.no-decoration {
   background-image: none;
 }
 
-input[type=radio] {
+input[type='radio'] {
   margin: 0px;
+}
+
+input[type='email'],
+input[type='password'] {
+  width: 100%;
 }
 
 .radio-wrapper {
@@ -219,19 +224,19 @@ input[type=radio] {
   align-items: center;
 }
 
-input[type=radio] {
+input[type='radio'] {
   opacity: 0;
   margin: 0 0.5rem 0 0;
   z-index: 1;
   cursor: pointer;
 }
-input[type=radio] + label {
+input[type='radio'] + label {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
-input[type=radio] + label::before {
-  content: "";
+input[type='radio'] + label::before {
+  content: '';
   display: inline-block;
   position: absolute;
   top: -2px;
@@ -241,8 +246,8 @@ input[type=radio] + label::before {
   width: 18px;
   height: 18px;
 }
-input[type=radio] + label::after {
-  content: "";
+input[type='radio'] + label::after {
+  content: '';
   position: absolute;
   display: inline-block;
   left: -20.5px;
@@ -251,13 +256,14 @@ input[type=radio] + label::after {
   width: 12px;
   height: 12px;
 }
-input[type=radio] + label > p {
+input[type='radio'] + label > p {
   margin: 0px;
 }
-input[type=radio]:checked + label::after {
+input[type='radio']:checked + label::after {
   background: var(--green);
 }
-input[type=radio]:focus + label::before, input[type=radio]:hover + label::before {
+input[type='radio']:focus + label::before,
+input[type='radio']:hover + label::before {
   box-shadow: 0 0px 8px var(--green);
 }
 
@@ -426,7 +432,7 @@ a > img {
   margin: 6rem;
 }
 
-.fullWidth {
+.full-width {
   width: 100%;
 }
 
@@ -434,9 +440,11 @@ a > img {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 5px 0px;
 }
-.separator::before, .separator::after {
-  content: "";
+.separator::before,
+.separator::after {
+  content: '';
   flex: 1;
   border-bottom: 1px solid var(--white);
 }
@@ -450,7 +458,7 @@ a > img {
 .splash-container {
   color: var(--black);
   text-shadow: 0.44rem 0.05rem var(--javaScriptYellow);
-  background-image: url("/background.png");
+  background-image: url('/background.png');
   background-size: 100vw 110vh;
   display: flex;
   flex-direction: column;
@@ -460,9 +468,8 @@ a > img {
   height: 70vh;
 }
 
-.text-shortened {
-  width: 79%;
-  margin: 10px 0px 0px 10px;
+.inputField > * {
+  margin: 10px 5px;
 }
 
 /* Dark theme */

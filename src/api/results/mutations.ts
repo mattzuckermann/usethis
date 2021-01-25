@@ -13,10 +13,12 @@ export const resultsMutations = {
       }
     ): Promise<Result> {
       try {
-        const newResult = await Results.create(result);
+        // @ts-ignore
+        const newResult: Result = await Results.create(result);
         // Add result to corresponding quiz
         await Quizzes.updateOne(
           { slug: newResult.quizSlug },
+          // @ts-ignore
           { $push: { results: newResult } },
           { new: true }
         );

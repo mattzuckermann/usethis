@@ -34,7 +34,7 @@ const Profile = ({ user }: { user: User }): ReactElement => {
             <p>{data?.result.userEmail}</p>
             <p>{data?.result.quizSlug}</p>
             <p>
-              {data?.result.answers.map((answer, index) => {
+              {data?.result.answers.map((answer: string, index: number) => {
                 return <p key={index}>{answer}</p>;
               })}
             </p>

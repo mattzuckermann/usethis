@@ -10,60 +10,40 @@ export const resultsResolvers = {
       });
       return result;
     },
-    async userResults(
-      _: null,
-      { userEmail }: { userEmail: string }
-    ): Promise<Result[]> {
-      const allUserResults = await Results.aggregate([
-        { $match: { userEmail } },
-        { $sort: { dateCreated: -1 } },
-        {
-          $group: {
-            _id: '$quizSlug',
-            results: {
-              $addToSet: {
-                _id: '$_id',
-                answers: '$answers',
-                dateCreated: '$dateCreated',
-              },
-            },
-          },
-        },
-      ]);
-      return allUserResults;
-    },
     async results(): Promise<Result[]> {
       const allResults = await Results.find();
+      // @ts-ignore
       return allResults;
-    },
-    async userResults(
-      _: null,
-      { userEmail }: { userEmail: string }
-    ): Promise<Result[]> {
-      const allUserResults = await Results.aggregate([
-        { $match: { userEmail } },
-        { $sort: { dateCreated: -1 } },
-        {
-          $group: {
-            _id: '$quizSlug',
-            results: {
-              $addToSet: {
-                _id: '$_id',
-                answers: '$answers',
-                dateCreated: '$dateCreated',
-              },
-            },
-          },
-        },
-      ]);
-      return allUserResults;
     },
     async quizResults(
       _: null,
       { quizSlug }: { quizSlug: string }
     ): Promise<Result[]> {
       const allQuizResults = await Results.find({ quizSlug });
+      // @ts-ignore
       return allQuizResults;
+    },
+    async userResults(
+      _: null,
+      { userEmail }: { userEmail: string }
+    ): Promise<Result[]> {
+      const allUserResults = await Results.aggregate([
+        { $match: { userEmail } },
+        { $sort: { dateCreated: -1 } },
+        {
+          $group: {
+            _id: '$quizSlug',
+            results: {
+              $addToSet: {
+                _id: '$_id',
+                answers: '$answers',
+                dateCreated: '$dateCreated',
+              },
+            },
+          },
+        },
+      ]);
+      return allUserResults;
     },
     async userQuizResults(
       _: null,
@@ -73,6 +53,7 @@ export const resultsResolvers = {
         userEmail,
         quizSlug,
       }).sort({ dateCreated: -1 });
+      // @ts-ignore
       return allUserQuizResults;
     },
   },

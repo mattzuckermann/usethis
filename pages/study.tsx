@@ -19,9 +19,11 @@ const studyLinks = [
 ];
 
 const Study = ({ user }: { user: User }): ReactElement => {
+  console.log(user);
   return (
     <main className="layout">
-      <h1>Study Materials:</h1>
+      <h1>{user?.name ? `Let's study, ${user.name}!` : `Let's study!`}</h1>
+      {/* <h1>Study Materials:</h1> */}
       <hr />
       <section>
         {studyLinks.map((studyLink, index) => {

@@ -5,6 +5,7 @@ export const problemsResolvers = {
   Query: {
     async problems(): Promise<Problem[]> {
       const allProblems = await Problems.find();
+      // @ts-ignore
       return allProblems;
     },
   },

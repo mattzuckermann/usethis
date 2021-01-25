@@ -12,6 +12,7 @@ export const problemsMutations = {
       }
     ): Promise<Problem> {
       try {
+        // @ts-ignore
         const newProblem = await Problems.create(problem);
         return newProblem;
       } catch (err) {

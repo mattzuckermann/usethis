@@ -6,7 +6,7 @@ import { GetServerSidePropsContext } from 'next';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_QUIZZES } from '../../graphql/queries/quizzes';
 
-const Quizzes = ({ user }: { user: User }): ReactElement => {
+const Quizzes = (): ReactElement => {
   const { data, loading, error } = useQuery(GET_QUIZZES);
 
   return (

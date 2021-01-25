@@ -11,6 +11,7 @@ export const usersResolvers = {
     },
     async users(): Promise<User[]> {
       const allUsers = await Users.find();
+      // @ts-ignore
       return allUsers;
     },
   },
@@ -18,10 +19,10 @@ export const usersResolvers = {
     name: 'Date',
     description: 'Date custom scalar',
     parseValue(value) {
-      return new Date(value); // value from the client
+      return new Date(value);
     },
     serialize(value) {
-      return value.getTime(); // value sent to the client
+      return value.getTime();
     },
     parseLiteral(ast) {
       if (ast.kind === Kind.INT) {

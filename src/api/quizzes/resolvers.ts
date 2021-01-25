@@ -1,6 +1,5 @@
 import Quizzes from './quizzes';
 import { Quiz } from '../../@types/quizzes';
-import { linkToExecutor } from 'graphql-tools';
 
 export const quizzesResolvers = {
   Query: {
@@ -14,6 +13,7 @@ export const quizzesResolvers = {
       const allQuizzes = await Quizzes.find({})
         .sort({ dateCreated: -1 })
         .populate('problems');
+      // @ts-ignore
       return allQuizzes;
     },
     async quizzesTakenByUser(
@@ -35,6 +35,7 @@ export const quizzesResolvers = {
       quizzesTakenByUser = quizzesTakenByUser.filter(function (quiz) {
         return quiz.results.length !== 0;
       });
+      // @ts-ignore
       return quizzesTakenByUser;
     },
   },

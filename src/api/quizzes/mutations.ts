@@ -5,6 +5,7 @@ export const quizzesMutations = {
   Mutation: {
     async addQuiz(_: null, { quiz }: { quiz: QuizInput }): Promise<Quiz> {
       try {
+        // @ts-ignore
         const newQuiz = await Quizzes.create(quiz);
         return newQuiz.populate('problems');
       } catch (err) {

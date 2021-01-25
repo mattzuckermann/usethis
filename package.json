@@ -25,6 +25,7 @@
     "apollo-link-persisted-queries": "^0.2.2",
     "apollo-server-micro": "^2.19.0",
     "babel-plugin-import-graphql": "^2.7.0",
+    "bcrypt": "^5.0.0",
     "classnames": "^2.2.6",
     "coveralls": "^3.1.0",
     "framer-motion": "^3.2.1",
@@ -42,9 +43,11 @@
     "typeorm": "0.2.28"
   },
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/classnames": "^2.2.11",
     "@types/jest": "^26.0.19",
     "@types/mocha": "^8.2.0",
-    "@types/mongoose": "^5.10.1",
+    "@types/mongoose": "^5.10.3",
     "@types/next": "^9.0.0",
     "@types/next-auth": "^3.1.18",
     "@types/react": "^17.0.0",
