@@ -40,7 +40,7 @@
     "react-dom": "17.0.1",
     "react-spring": "^8.0.27",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "0.2.28"
+    "typeorm": "0.3.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
@@ -76,7 +76,7 @@
     "mongodb": "^3.6.3"
   },
   "resolutions": {
-    "typeorm": "0.2.28"
+    "typeorm": "0.3.0"
   },
   "husky": {
     "hooks": {
